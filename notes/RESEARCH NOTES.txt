@@ -1,0 +1,45 @@
+Wait let's get the general structure down first:
+
+
+
+Introduction -> Related Work -> Preliminaries -> Methods/Probes -> Results (Each subsection is composed of an experimental setup part and a results part) -> Quick Discussion -> Potential Practical Implications (this one is to address the significance flag I got at ICML, we talk about RoPE maybe not being good for shallow models, SSDC as a probe for different types of spatial strategies, etc..) -> Conclusion -> Impact Statement (will be minimal like one or two sentences, just cuz NeurIPS likes this a lot for whatever reason)
+
+
+
+The Results section is obviously the most dense, let's go over its subsections (these names are temporary, I'll think of better ones when we get there):
+
+
+
+1/ Untrained Ablated Model as a Comparative Baseline: where we analyze the SSDC and find it to be at a constant high value to really DRIVE HOME AND HIGHLIGHT THAT SSDC IS NOT MEANT TO BE USED AS A STANDALONE METRIC (frustration from an old reviewer).  This is because of architectural priors and the structure already present in the data. This also acts as a baseline to compare trained ablated models to, since trained ablated models grow in SSDC, showcasing the "content-based spatial organization", where untrained ablated models lack these dynamics and just exhibit a decently high static SSDC.
+
+
+
+2/ Depth-wise Evolution of Spatial Structure Across Different Architectures:
+
+
+
+Basically just seeing what happens to SSDC with depth on all our models, ablated and RPT exhibit some dynamics in their SSDC, RoPE increasing constantly with depth, SinuPE and APE having that "injection at the encoder blocks" behavior, etc..
+
+
+
+3/ Uncovering Spatial Strategies:
+
+
+
+Basically the RPI intervention, APE and SinuPE recovering very quickly at encoder blocks then stagnating (but with SinuPE being here at layer 0 pre-encoding because of the trigonometry BS like cos(a-b) type shi), RoPE collapsing totally but recovering spatial structure with depth. This shows the absolute-position-based spatial organization. This contrasts with ablated and RPT models that just collapse and stay collapsed.
+
+
+
+4/ Robustness:
+
+
+
+Need I say more? Just evaluating the robustness of these models to different distributional shifts, Gaussian Blur, our custom frequency transforms (like just a sequence of ColorJitter and stuff like that), and maybe adding Imagenet-100-C.
+
+
+
+I think that's about it? Maybe I'll add more if we add more experiments. The Appendix will include hyperparameters and reproducibility stuff, additional representational analyses that are interesting but don't fit the main story, sanity checks, stuff like that.
+
+
+
+Thoughts? Is there anything I'm missing?

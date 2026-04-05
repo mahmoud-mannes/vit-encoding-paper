@@ -1,0 +1,172 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2026
+
+% The authors should use one of these tracks.
+% Before accepting by the NeurIPS conference, select one of the options below.
+% 0. "default" for submission
+\usepackage[preprint]{neurips_2026}
+% the "default" option is equal to the "main" option, which is used for the Main Track with double-blind reviewing.
+% 1. "main" option is used for the Main Track
+%  \usepackage[main]{neurips_2026}
+% 2. "position" option is used for the Position Paper Track
+%  \usepackage[position]{neurips_2026}
+% 3. "eandd" option is used for the Evaluations & Datasets Track
+ % \usepackage[eandd]{neurips_2026}
+ % if you need to opt-in for a single-blind submission in the E&D track:
+ %\usepackage[eandd, nonanonymous]{neurips_2026}
+% 4. "creativeai" option is used for the Creative AI Track
+%  \usepackage[creativeai]{neurips_2026}
+% 5. "sglblindworkshop" option is used for the Workshop with single-blind reviewing
+ % \usepackage[sglblindworkshop]{neurips_2026}
+% 6. "dblblindworkshop" option is used for the Workshop with double-blind reviewing
+%  \usepackage[dblblindworkshop]{neurips_2026}
+
+% After being accepted, the authors should add "final" behind the track to compile a camera-ready version.
+% 1. Main Track
+ % \usepackage[main, final]{neurips_2026}
+% 2. Position Paper Track
+%  \usepackage[position, final]{neurips_2026}
+% 3. Evaluations & Datasets Track
+ % \usepackage[eandd, final]{neurips_2026}
+% 4. Creative AI Track
+%  \usepackage[creativeai, final]{neurips_2026}
+% 5. Workshop with single-blind reviewing
+%  \usepackage[sglblindworkshop, final]{neurips_2026}
+% 6. Workshop with double-blind reviewing
+%  \usepackage[dblblindworkshop, final]{neurips_2026}
+% Note. For the workshop paper template, both \title{} and \workshoptitle{} are required, with the former indicating the paper title shown in the title and the latter indicating the workshop title displayed in the footnote.
+% For workshops (5., 6.), the authors should add the name of the workshop, "\workshoptitle" command is used to set the workshop title.
+% \workshoptitle{WORKSHOP TITLE}
+
+% "preprint" option is used for arXiv or other preprint submissions
+ % \usepackage[preprint]{neurips_2026}
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2026}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+
+% Note. For the workshop paper template, both \title{} and \workshoptitle{} are required, with the former indicating the paper title shown in the title and the latter indicating the workshop title displayed in the footnote. 
+\title{Positional Encodings Anchor Spatial Structure in Vision Transformers: A Geometric Perspective on Robustness}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+
+\author{%
+  Mahmoud Mannes \\
+  Undergrad Student\\
+  ESSTHS\\
+  \texttt{mannesmahmoud@gmail.com} \\
+  % examples of more authors
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+Positional embeddings (PEs) in Vision Transformers (ViTs) are known to impact performance and robustness, but their role in shaping internal spatial representations is not well understood. In this work, we study how different forms of PEs influence the representational geometry of ViTs and its relationship to robustness.
+We introduce a metric, Spatial Similarity Distance Correlation (SSDC), to quantify spatial structure in token representations. Using this metric, we show that ViTs trained without PEs still develop non-trivial spatial structure, but this structure is driven by visual content and collapses under token permutation.
+In contrast, we find that all PEs considered (learned absolute, sinusoidal, and rotary) induce a consistent shift toward position-anchored spatial organization. Representations in these models remain stable under perturbations that disrupt content, and exhibit substantially improved robustness to distributional shifts.
+We further show that while different PEs produce distinct depth-wise trajectories of spatial structure, their robustness properties are largely similar, suggesting that robustness depends on the presence of a stable positional reference frame rather than the specific encoding mechanism.
+These results offer a mechanistic account of how positional encodings shape internal representations, with implications for the principled design of future encoding schemes.
+\end{abstract}
+
+\section{Introduction}
+Vision Transformers (ViTs) have emerged as a powerful alternative to convolutional architectures for visual recognition by modeling images as sequences of patch tokens processed through self-attention mechanisms \citep{dosovitskiy2021an}. Unlike Convolutional Neural Networks (CNNs), ViTs lack strong built-in biases toward locality and translation equivariance. To compensate, most ViT architectures rely on Positional Embeddings (PEs) to inject explicit spatial information, allowing the model to distinguish patches originating from different locations in the image.
+
+Existing studies suggest that ViTs can retain substantial performance even when positional information is removed or degraded \citep{chu2023conditional}. This potentially indicates that transformers partially reconstruct spatial relationships from patch content alone, analogous to how CNNs learn implicit positional information from zero-padding \citep{Islam*2020How}. These findings challenge the conventional view that PEs are strictly necessary and raise fundamental questions about what functional advantages they provide beyond basic spatial identifiability.
+
+Prior work has largely explored positional embeddings through downstream performance or architectural variations. While informative, such approaches reveal little about how PEs shape the internal representations of the model. In particular, the effects of positional embeddings on the geometry and stability of token representations across the transformer stack remain poorly understood. Crucially, existing work has not examined whether different forms of positional encoding — learned absolute, sinusoidal, or rotary — induce fundamentally different spatial reasoning strategies, or whether their effects on robustness share a common mechanism.
+
+In this work, we adopt a mechanistic perspective to study the role of positional embeddings in ViTs. We analyze the evolution of token representations in the residual stream using tools from representational geometry \citep{raghu2021do}, introducing the Spatial Similarity Distance Correlation (SSDC), a metric designed to quantify how spatial relationships are reflected in token similarity patterns. Critically, we treat SSDC not as a standalone measure but as a probe whose sensitivity to token permutation at inference reveals whether a model's spatial structure is anchored to absolute position or driven by patch content. Using this framework, we systematically compare ViTs trained with learned absolute positional embeddings (APE), sinusoidal encodings (SinuPE), rotary embeddings (RoPE), and no positional embeddings at all, examining their impact on spatial reasoning strategy and robustness to distributional shifts.
+
+Our central finding is that the specific encoding mechanism matters far less than whether a consistent positional signal is present at all. We demonstrate that:
+\begin{itemize}
+    \item \textbf{Positional encodings induce a shift toward absolute-position-based spatial organization:} All PE types considered push ViTs away from a content-driven spatial strategy toward one anchored to absolute token indices, as revealed by the robustness of SSDC to random token permutation at inference. Models trained without any positional signal, or with positional embeddings systematically destroyed during training, rely on patch content for spatial structure and exhibit SSDC collapse under permutation.
+    \item \textbf{This strategic shift, not the specific encoding mechanism, confers robustness:} Despite exhibiting distinct depth-wise trajectories of spatial structure, APE, SinuPE, and RoPE models achieve broadly comparable robustness to distributional shifts. In contrast, models that fail to develop absolute-position-based strategies exhibit substantially higher fragility, regardless of whether positional embeddings are architecturally present.
+    \item \textbf{A stable positional reference frame is necessary for robustness:} Using a controlled Random Permutation Training (RPT) intervention that preserves the presence of PEs while destroying absolute positional mapping, we show that robustness depends on the presence of a stable positional reference frame rather than on the mere explicit presence of PEs alone.
+\end{itemize}
+Together, our results provide a unified, mechanistic account of how positional encodings shape internal representations across encoding types, and offer a geometric perspective on why positional embeddings remain critical for robust visual recognition.
+\section{Related Work}
+  \textbf{Positional Information in Vision Transformers}
+
+  The standard Vision Transformer (ViT) breaks the permutation invariance of self-attention by adding learnable absolute positional embeddings (PEs) to patch tokens \cite{dosovitskiy2021an}, establishing the dominant paradigm for spatial encoding in vision transformers. However, it has been found that ViTs retain substantial performance even when PEs are degraded or removed \cite{dosovitskiy2021an, chu2023conditional}, suggesting ViTs may be able to partially recover spatial structure and implicit positional information without PEs. In fact, similar observations have been reported outside the vision domain. For example, recent work on decoder-only Transformers shows that models trained without PEs can implicitly recover positional information and that they tend to use relative positions in practice \cite{kazemnejad2023the}. While this analysis is specific to generative language models, it reinforces the broader notion that explicit PEs are not strictly required for structured positional information to emerge. This parallels earlier findings in CNNs, where it was demonstrated that convolutional networks learn substantial positional information implicitly, for instance from architectural features like zero-padding \cite{Islam*2020How}. These observations create the fundamental puzzle our work addresses: if spatial structure can emerge without explicit guidance, what functional role do PEs actually play? Prior studies on PEs in ViTs have primarily focused on architectural variants \cite{d’Ascoli_2022,Liu2021swin,Heo2024RoPE} or downstream performance comparisons \cite{dosovitskiy2021an, chu2023conditional}, leaving the mechanistic impact of PEs on internal representations largely unexplored.
+
+  \textbf{Representational Analysis of Transformers}
+
+  A separate line of work analyzes the geometry and dynamics of transformer representations using tools from representational analysis. Earlier work provided foundational comparisons between ViT and CNN representations \cite{raghu2021do}, revealing distinct spatial organization patterns. Subsequent work has examined how attention mechanisms transform representations\cite{kobayashi-etal-2021-incorporating}, the evolution of representational rank through depth \cite{pmlr-v139-dong21a}, and the tendency for token representations to homogenize in deep layers \cite{Bhojanapalli2021robust}. The residual stream framework provides the conceptual foundation for our analysis of token representations across layers \cite{elhage2021mathematical}. However, despite these insights, these representational analyses have not specifically targeted the causal effect of positional embeddings on this geometry, nor have they connected these internal dynamics to external robustness properties.
+
+  \textbf{Robustness of Visual Models}
+
+  Vision Transformers exhibit distinct robustness profiles compared to convolutional networks. Prior works have systematically compared ViT and CNN robustness, finding transformers exhibit greater resilience to spatial perturbations but increased sensitivity to certain texture changes \cite{Bhojanapalli2021robust}. Subsequent work further establishes that ViTs demonstrate favorable out-of-distribution generalization properties \cite{Paul_Chen_2022}. These observations connect to the broader literature on shape versus texture bias in visual recognition, where it has been shown that models with stronger shape bias tend to exhibit better generalization \cite{geirhos2018imagenettrained}. While the effect that PEs have on robustness have been documented \cite{Mao2021TowardsRV}, the link between a model's specific spatial reasoning strategy, such as relying on absolute position versus inferring relations from content, and its robustness to distribution shifts has not been mechanistically established.
+
+  \textbf{Our Contribution}
+
+  We bridge these disconnected research threads to form a clearer image of how PEs affect the internal geometry of ViTs and how this links to these models' robustness to distributional shifts. Unlike performance-focused ablation studies \cite{dosovitskiy2021an, chu2023conditional}, we perform a representational analysis to show how PEs work internally. We show that they (1) shift the model's internal structure to an absolute-position-based spatial organization (2) that this strategic shift (and not the mere presence of PEs) confers robustness to texture-based distribution shifts. We introduce the Spatial Similarity Distance Correlation (SSDC) metric and employ controlled interventions like Random Permutation during Training (RPT) and Random Permutation at Inference (RPI) to isolate these mechanisms, providing mechanistic account of why PEs remain crucial beyond their basic function of breaking permutation invariance.
+
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Technical appendices and supplementary material}
+Technical appendices with additional results, figures, graphs, and proofs may be submitted with the paper submission before the full submission deadline (see above). You can upload a ZIP file for videos or code, but do not upload a separate PDF file for the appendix. There is no page limit for the technical appendices. 
+
+Note: Think of the appendix as ``optional reading'' for reviewers. The paper must be able to stand alone without the appendix; for example, adding critical experiments that support the main claims to an appendix is inappropriate. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\input{checklist.tex}
+
+
+\end{document}

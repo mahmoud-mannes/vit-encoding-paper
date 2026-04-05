@@ -1,0 +1,35 @@
+--- REMOVING LATE LAYERS TO PROBE ROBUSTNESS-GEOMETRY LINK IN RoPE MODELS ---
+
+We will use APE models as a baseline:
+
+APE 4 Last Layers Removed: NORMAL ACCURACY 30% FREQ SHIFT ACCURACY 16.5% FREQ SHIFT SCORE 0.455
+APE 2 Last Layers Removed: NORMAL ACCURACY 35.4% FREQ ACCURACY 20% FREQ SHIFT SCORE 0.435
+
+RoPE 2 Last Layers Removed: NORMAL ACCURACY 23.1% FREQ ACCURACY 13.3% FREQ SHIFT SCORE 0.42
+RoPE 4 Last Layers Removed: NORMAL ACCURACY 24.2% ??? FREQ ACCURACY 13.9% FREQ SHIFT SCORE ~0.42
+
+--- DISRUPTING SIMILARITY GEOMETRY BY ADDING NOISE TO THE Q, K TENSORS ---
+
+(CODE IS q,k = q + torch.rand_like(q) * eps, k + torch.rand_like(k) * eps)
+* EPSILON = 0 (BASELINE), SCORE 0.34 (THE HIGHER THE SCORE THE LOWER THE ROBUSTNESS)
+
+* FOR EPSILON = 5:
+ACC ON NORMAL DATASET = 13%, ACC ON SHIFTED DATASET = 6% , SCORE = 0.5 (COMPARED TO 0.34 BEFORE ADDING THE NOISE)
+
+* FOR EPSILON = 2.5:
+NORMAL ACC = 54%, SHIFTED ACCURACY = 31.9%, SCORE = 0.41 (COMPARED TO 0.34 BEFORE ADDING NOISE)
+
+Seems promising so far, right?
+Here's something that's gonna shock you: The epsilon has no impact whatsoever on the recovery of SSDC after RPI on APE models.
+Yes, NO impact, whatsoever. In fact, even setting q and k to be totally random (by setting q = torch.rand_like(q) * eps, with eps = 1000) still does not change the fact that APE models recover their SSDC even after randomly permuting its tokens, even the magnitude of recovery remains roughly the same.
+
+PRACTICAL SIGNIFICANCE:
+
+That's a smart response to the significance critique. Grounding mechanistic findings in actionable predictions is exactly what reviewers mean when they ask "so what?" Let me think through this with you.
+The RoPE depth argument is your strongest practical claim:
+The logic is tight — RoPE builds spatial structure incrementally through depth, so shallow models never accumulate enough for a stable positional reference frame to form. The prediction is concrete and falsifiable: small/shallow ViTs should show weaker robustness with RoPE than with APE or SinuPE, which inject positional structure early. This is the kind of claim that makes a mechanistic paper feel like it has teeth.
+Other directions worth considering:
+Permutation augmentation as a regularizer — RPT models behave like ablated models, which means deliberately destroying positional signal during training prevents the model from forming a stable reference frame. This has a direct negative implication: random token augmentation strategies (which some people have explored for data efficiency) may inadvertently trade robustness for other gains. You're not claiming this kills the idea, just that there's a robustness cost that wasn't previously understood mechanistically.
+PE choice under distribution shift — if your robustness scores are similar across PE types on standard corruptions, but the depth trajectory differs, then for very deep models the distinction may matter less, but for transfer learning or fine-tuning on shallow heads it might. Speculative, but worth one sentence.
+SSDC as a diagnostic tool — practitioners could use SSDC during training to cheaply verify whether a model is forming a stable positional reference frame, without running full robustness evaluations. This is a low-cost practical contribution.
+The RoPE + shallow ViT prediction is the one I'd lean on hardest because it's the most directly testable and most surprising to someone who assumes RoPE is strictly better. Do you have any preliminary evidence for it, or is it purely a prediction at this stage?

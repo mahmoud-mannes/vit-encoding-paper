@@ -1,0 +1,57 @@
+INTACT SSDC 0.61 -> 0.68 ON CORRUPT DATASET
+INTACT SSDC 0.53 -> 0.68 -> 0.7 ON NORMAL DATASET 
+
+ABLATED NORMAL DATASET SSDC: 0.49 -> 0.59 -> 0.59 -> 0.61
+ABLATED CORRUPT DATASET SSDC: 0.59 -> 0.65 -> 0.62 -> ...
+
+======= A Study of RoPE ========== 
+
+---PURE ROBUSTNESS---
+
+The higher the X SCORE (with X being FREQ (frequency shifts) or GAUSS (Gaussian Blur) or SPATIAL (Spatial Distributional Shifts like Rotations)) the worse the robustness.
+
+RoPE ACCURACY: NORMAL 71% (higher than APE models by 3%) FREQ 51% FREQ SCORE 0.28 GAUSS BLUR 63% GAUSS SCORE 0.11  SPATIAL ACCURACY 67.2% SPATIAL SCORE 0.06
+RPI on RoPE does destroy performance (71% -> 29%) in a similar manner to intact (68% -> 33%), though it seems intact is slightly more robust to random token permutation? This likely won't be mentioned in the paper.
+
+Overall, RoPE seems to be similar in terms of robustness to APE models.
+
+-- NORMAL GEOMETRY STUFF --
+We will sometimes refer to APE models as intact models.
+
+RoPE has similar effective rank and SSDC growth to an ablated model in the early layers. (ERM ~ 8 at layer 0, compared to an intact model's ~13, ablated ~7-8).
+SSDC: 0.47 -> 0.57
+However, it grows substantially with depth when compared to an ablated (or even intact model), it just keeps on growing with depth.
+
+RANDOM TOKEN PERMUTATION DESTROYS SSDC ON RoPE!!!! But, it grows substantially with depth unlike on ablated models (goes from 0 to 0.3, whereas on ablated models it remains 0)
+
+Actually, on RoPE, SSDC always grows with depth, constantly. Whereas on APE models, the main growth happens from layer 0 to layer 1 (pre-encoding to post-encoding),
+the remains roughly constant with dips and peaks.
+
+Summary of RoPE:
+- High robustness, high performance, low effective rank, SSDC destroyed with random permutation, but grows with depth.
+
+---My thoughts 5 minutes after seeing this---
+
+RoPE uses a form of the absolute token index spatial strategy, just a different one than the APE uses. This one seems to be integrated through depth, not something that is injected at the very first layer.
+
+======== A Study of SinuPE ==========
+
+---PURE ROBUSTNESS---
+
+SinuPE Accuracy: NORMAL 68% (Equal to that of the APE Model) FREQ SHIFT 45.8% FREQ SHIFT SCORE 0.32 GAUSS BLUR 60% GAUSS SCORE 0.11 SPATIAL ACCURACY 65% SPATIAL SCORE ~0.05
+
+SinuPE seems to be the most robust to random token permutation at inference (68% -> 44% accuracy). Don't know if this will be mentioned in the paper.
+
+---GEOMETRY STUFF---
+
+Actually interesting, effective rank at ~8 once again (similar to RoPE and RPT RPI [side-side note, RPT RPI (which to remind you is still APE just with random permutation) is still slightly higher in rank than RoPE and SinuPE, something about APE seems to be special, not sure if I'll include this in the paper, it's a difference of one rank after all], only slightly higher than ablated) , it seems as though the only type of PE that injects high effective rank in the early layer are APEs.
+
+SSDC behaves similarly to APEs. Early peak then stagnation.
+
+Random Permutation at Inference (RPI) affects SSDC in a similar way to APE models, suggesting an absolute position index strategy (i.e. Random Permutation does not totally destroy SSDC). However, there is one caveat. At layer 0, pre-encoder-blocks, APE models completely collapse in terms of SSDC (~0) when done with RPI. This is not the case for SinuPE (~0.2-0.3 SSDC at layer 0). Both show a significant increase from layer 0 to layer 1 in terms of SSDC (both up to ~0.5), but with APE obviously having a bigger relative jump since its SSDC was much lower at layer 0. In fact, this pattern shows up even without RPI, it seems SinuPE injects some relative position to the Similarity Geometry without even having to go through the encoder block (this may be due to its sinusoidal structure and some trigonometry BS like cos(a-b) = whatever), whereas with APEs the model "constructs" its positional understanding through the encoder block (all hypothetical speak ofc, we can't speak this surely and this causally in the paper).
+
+SinuPE Summary: Similar overall performance (robustness and peak accuracy) to APE and RoPE, with both APE and SinuPE slightly behind RoPE in terms of peak accuracy (68% vs 71%, but that could be explained away by training dynamics or whatever), almost exactly identical spatial strategy to APE (with some slight caveats).
+
+---Overall Conclusion to Extract from SinuPE---
+
+I think this eliminates the prior hypothesis we had about absolute position spatial structure increasing rank, it seems as though that is something specific and special to APEs, since SinuPEs seem to share that same strategy (or at least something similar) but don't share the same high effective rank in the early layers. Additionally, it seems as though any type of positional encoding will suffise for the robustness increases. As long as the positional signal is consistent and usable, the model will form a spatial strategy that relies more heavily on spatial structure than pure content, thus becoming more robust. Effective rank on its own (as hypothesized before) seems to be totally disconnected from performance or robustness. It seems APE and effective rank are connected in some special way that I can't put my finger on quite yet.
