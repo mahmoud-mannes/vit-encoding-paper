@@ -108,7 +108,7 @@
 \begin{abstract}
 Positional embeddings (PEs) in Vision Transformers (ViTs) are known to impact performance and robustness, but their role in shaping internal spatial representations is not well understood. In this work, we study how different forms of PEs influence the representational geometry of ViTs and its relationship to robustness.
 We introduce a metric, Spatial Similarity Distance Correlation (SSDC), to quantify spatial structure in token representations. Using this metric, we show that ViTs trained without PEs still develop non-trivial spatial structure, but this structure is driven by visual content and collapses under token permutation.
-In contrast, we find that all PEs considered (learned absolute, sinusoidal, and rotary) induce a consistent shift toward position-anchored spatial organization. Representations in these models remain stable under perturbations that disrupt content, and exhibit substantially improved robustness to distributional shifts.
+In contrast, we find that all PEs considered (learned absolute, sinusoidal, and rotary) induce a consistent shift toward an index-anchored spatial organization. Representations in these models remain stable under perturbations that disrupt content, and exhibit substantially improved robustness to distributional shifts.
 We further show that while different PEs produce distinct depth-wise trajectories of spatial structure, their robustness properties are largely similar, suggesting that robustness depends on the presence of a stable positional reference frame rather than the specific encoding mechanism.
 These results offer a mechanistic account of how positional encodings shape internal representations, with implications for the principled design of future encoding schemes.
 \end{abstract}
@@ -124,7 +124,7 @@ In this work, we adopt a mechanistic perspective to study the role of positional
 
 Our central finding is that the specific encoding mechanism matters far less than whether a consistent positional signal is present at all. We demonstrate that:
 \begin{itemize}
-    \item \textbf{Positional encodings induce a shift toward absolute-position-based spatial organization:} All PE types considered push ViTs away from a content-driven spatial strategy toward one anchored to absolute token indices, as revealed by the robustness of SSDC to random token permutation at inference. Models trained without any positional signal, or with positional embeddings systematically destroyed during training, rely on patch content for spatial structure and exhibit SSDC collapse under permutation.
+    \item \textbf{Positional encodings induce a shift toward index-based spatial organization:} All PE types considered push ViTs away from a content-driven spatial strategy toward one anchored to absolute token indices, as revealed by the robustness of SSDC to random token permutation at inference. Models trained without any positional signal, or with positional embeddings systematically destroyed during training, rely on patch content for spatial structure and exhibit SSDC collapse under permutation.
     \item \textbf{This strategic shift, not the specific encoding mechanism, confers robustness:} Despite exhibiting distinct depth-wise trajectories of spatial structure, APE, SinuPE, and RoPE models achieve broadly comparable robustness to distributional shifts. In contrast, models that fail to develop absolute-position-based strategies exhibit substantially higher fragility, regardless of whether positional embeddings are architecturally present.
     \item \textbf{A stable positional reference frame is necessary for robustness:} Using a controlled Random Permutation Training (RPT) intervention that preserves the presence of PEs while destroying absolute positional mapping, we show that robustness depends on the presence of a stable positional reference frame rather than on the mere explicit presence of PEs alone.
 \end{itemize}
@@ -132,22 +132,98 @@ Together, our results provide a unified, mechanistic account of how positional e
 \section{Related Work}
   \textbf{Positional Information in Vision Transformers}
 
-  The standard Vision Transformer (ViT) breaks the permutation invariance of self-attention by adding learnable absolute positional embeddings (PEs) to patch tokens \cite{dosovitskiy2021an}, establishing the dominant paradigm for spatial encoding in vision transformers. However, it has been found that ViTs retain substantial performance even when PEs are degraded or removed \cite{dosovitskiy2021an, chu2023conditional}, suggesting ViTs may be able to partially recover spatial structure and implicit positional information without PEs. In fact, similar observations have been reported outside the vision domain. For example, recent work on decoder-only Transformers shows that models trained without PEs can implicitly recover positional information and that they tend to use relative positions in practice \cite{kazemnejad2023the}. While this analysis is specific to generative language models, it reinforces the broader notion that explicit PEs are not strictly required for structured positional information to emerge. This parallels earlier findings in CNNs, where it was demonstrated that convolutional networks learn substantial positional information implicitly, for instance from architectural features like zero-padding \cite{Islam*2020How}. These observations create the fundamental puzzle our work addresses: if spatial structure can emerge without explicit guidance, what functional role do PEs actually play? Prior studies on PEs in ViTs have primarily focused on architectural variants \cite{d’Ascoli_2022,Liu2021swin,Heo2024RoPE} or downstream performance comparisons \cite{dosovitskiy2021an, chu2023conditional}, leaving the mechanistic impact of PEs on internal representations largely unexplored.
+  The standard Vision Transformer (ViT) breaks the permutation invariance of self-attention by adding learnable absolute positional embeddings (PEs) to patch tokens \citep{dosovitskiy2021an}, establishing the dominant paradigm for spatial encoding in vision transformers. However, it has been found that ViTs retain substantial performance even when PEs are degraded or removed \citep{dosovitskiy2021an, chu2023conditional}, suggesting ViTs may be able to partially recover spatial structure and implicit positional information without PEs. In fact, similar observations have been reported outside the vision domain. For example, recent work on decoder-only Transformers shows that models trained without PEs can implicitly recover positional information and that they tend to use relative positions in practice \cite{kazemnejad2023the}. While this analysis is specific to generative language models, it reinforces the broader notion that explicit PEs are not strictly required for structured positional information to emerge. This parallels earlier findings in CNNs, where it was demonstrated that convolutional networks learn substantial positional information implicitly, for instance from architectural features like zero-padding \cite{Islam*2020How}. These observations create the fundamental puzzle our work addresses: if spatial structure can emerge without explicit guidance, what functional role do PEs actually play? Prior studies on PEs in ViTs have primarily focused on architectural variants \cite{d’Ascoli_2022,Liu2021swin,Heo2024RoPE} or downstream performance comparisons \cite{dosovitskiy2021an, chu2023conditional}, leaving the mechanistic impact of PEs on internal representations largely unexplored.
 
   \textbf{Representational Analysis of Transformers}
 
-  A separate line of work analyzes the geometry and dynamics of transformer representations using tools from representational analysis. Earlier work provided foundational comparisons between ViT and CNN representations \cite{raghu2021do}, revealing distinct spatial organization patterns. Subsequent work has examined how attention mechanisms transform representations\cite{kobayashi-etal-2021-incorporating}, the evolution of representational rank through depth \cite{pmlr-v139-dong21a}, and the tendency for token representations to homogenize in deep layers \cite{Bhojanapalli2021robust}. The residual stream framework provides the conceptual foundation for our analysis of token representations across layers \cite{elhage2021mathematical}. However, despite these insights, these representational analyses have not specifically targeted the causal effect of positional embeddings on this geometry, nor have they connected these internal dynamics to external robustness properties.
+  A separate line of work analyzes the geometry and dynamics of transformer representations using tools from representational analysis. Earlier work provided foundational comparisons between ViT and CNN representations \citep{raghu2021do}, revealing distinct spatial organization patterns. Subsequent work has examined how attention mechanisms transform representations\citep{kobayashi-etal-2021-incorporating}, the evolution of representational rank through depth \citep{pmlr-v139-dong21a}, and the tendency for token representations to homogenize in deep layers \citep{Bhojanapalli2021robust}. The residual stream framework provides the conceptual foundation for our analysis of token representations across layers \citep{elhage2021mathematical}. However, despite these insights, these representational analyses have not specifically targeted the causal effect of positional embeddings on this geometry, nor have they connected these internal dynamics to external robustness properties.
 
   \textbf{Robustness of Visual Models}
 
-  Vision Transformers exhibit distinct robustness profiles compared to convolutional networks. Prior works have systematically compared ViT and CNN robustness, finding transformers exhibit greater resilience to spatial perturbations but increased sensitivity to certain texture changes \cite{Bhojanapalli2021robust}. Subsequent work further establishes that ViTs demonstrate favorable out-of-distribution generalization properties \cite{Paul_Chen_2022}. These observations connect to the broader literature on shape versus texture bias in visual recognition, where it has been shown that models with stronger shape bias tend to exhibit better generalization \cite{geirhos2018imagenettrained}. While the effect that PEs have on robustness have been documented \cite{Mao2021TowardsRV}, the link between a model's specific spatial reasoning strategy, such as relying on absolute position versus inferring relations from content, and its robustness to distribution shifts has not been mechanistically established.
+  Vision Transformers exhibit distinct robustness profiles compared to convolutional networks. Prior works have systematically compared ViT and CNN robustness, finding transformers exhibit greater resilience to spatial perturbations but increased sensitivity to certain texture changes \citep{Bhojanapalli2021robust}. Subsequent work further establishes that ViTs demonstrate favorable out-of-distribution generalization properties \citep{Paul_Chen_2022}. These observations connect to the broader literature on shape versus texture bias in visual recognition, where it has been shown that models with stronger shape bias tend to exhibit better generalization \citep{geirhos2018imagenettrained}. While the effect that PEs have on robustness have been documented \citep{Mao2021TowardsRV}, the link between a model's specific spatial reasoning strategy, such as relying on absolute position versus inferring relations from content, and its robustness to distribution shifts has not been mechanistically established.
 
   \textbf{Our Contribution}
 
-  We bridge these disconnected research threads to form a clearer image of how PEs affect the internal geometry of ViTs and how this links to these models' robustness to distributional shifts. Unlike performance-focused ablation studies \cite{dosovitskiy2021an, chu2023conditional}, we perform a representational analysis to show how PEs work internally. We show that they (1) shift the model's internal structure to an absolute-position-based spatial organization (2) that this strategic shift (and not the mere presence of PEs) confers robustness to texture-based distribution shifts. We introduce the Spatial Similarity Distance Correlation (SSDC) metric and employ controlled interventions like Random Permutation during Training (RPT) and Random Permutation at Inference (RPI) to isolate these mechanisms, providing mechanistic account of why PEs remain crucial beyond their basic function of breaking permutation invariance.
+  We bridge these disconnected research threads to form a clearer image of how PEs affect the internal geometry of ViTs and how this links to these models' robustness to distributional shifts. Unlike performance-focused ablation studies \citep{dosovitskiy2021an, chu2023conditional}, we perform a representational analysis to show how PEs work internally. We show that they (1) shift the model's internal structure to an index-based spatial organization (2) that this strategic shift (and not the mere presence of PEs) confers robustness to texture-based distribution shifts. We introduce the Spatial Similarity Distance Correlation (SSDC) metric and employ controlled interventions like Random Permutation during Training (RPT) and Random Permutation at Inference (RPI) to isolate these mechanisms, providing mechanistic account of why PEs remain crucial beyond their basic function of breaking permutation invariance.
 
 
+\section{Preliminaries}
+    \subsection{Vision Transformer Architecture and Dataset}
 
+    All models used in our experiments are Vision Transformers trained from scratch on the ImageNet-100 dataset, with approximately 22M parameters (exact hyperparameters are provided in Appendix Section A). Images are partitioned into fixed-size patches, which are linearly projected into token embeddings and processed by a stack of multi-head self-attention and feedforward layers.
+
+    Since self-attention is permutation invariant, positional encodings (PEs) are required to inject spatial information into the token sequence. We consider three commonly used PE schemes, all adapted to 2D spatial structure:
+
+    \textbf{Learned Absolute Positional Embeddings (APE).}
+    A learnable embedding vector is assigned to each spatial position in the patch grid and added to the input token embeddings before the first transformer block. This establishes a fixed mapping between token index and spatial location, and introduces positional information additively into the residual stream.
+
+    \textbf{Sinusoidal Positional Embeddings.}
+    We use a fixed, non-learned sinusoidal encoding extended to two dimensions by applying independent sinusoidal functions along the height and width axes. The resulting encodings are concatenated and added to the token embeddings. Unlike APE, these embeddings are deterministic and encode position through structured periodic functions.
+
+    \textbf{Rotary Positional Embeddings (RoPE).}
+    Positional information is incorporated by applying position-dependent rotations to the query and key vectors within each attention layer. We use a 2D extension in which separate rotations are applied along spatial axes. Unlike APE and SinuPE, RoPE introduces positional information multiplicatively within the attention mechanism rather than additively into the residual stream.
+
+    These three approaches differ both in how positional information is parameterized (learned vs.\ fixed) and in how it is integrated into the model (additive input vs.\ multiplicative attention modulation), allowing us to study how different positional mechanisms influence internal representations.
+  \subsection{Index-Based and Content-Based Spatial Organization}
+  We distinguish between two qualitatively distinct modes of spatial organization in token 
+  representations.
+
+    \textbf{Index-based spatial organization} refers to a regime in which the representational 
+    similarity structure of tokens is systematically dependent on their position in the token 
+    sequence. Concretely, tokens that are spatially proximate in the image grid tend to have 
+    more similar representations \emph{by virtue of their token indices}, such that this 
+    structure persists even when the visual content of the corresponding patches is disrupted 
+    or permuted. This definition is strictly behavioral: we do not claim that the model 
+    explicitly encodes spatial coordinates or maintains an internal map of patch locations. 
+    Rather, we observe that the learned similarity structure is anchored to the fixed 
+    index-to-location mapping in a way that cannot be explained by visual content alone.
+
+    \textbf{Content-based spatial organization}, by contrast, refers to a regime in which 
+    token similarity is driven primarily by the visual features of the corresponding image 
+    patches. Spatial structure arises indirectly from natural image statistics --- nearby 
+    patches tend to share texture, color, and local structure --- and is therefore sensitive 
+    to any transformation that disrupts patch content or token ordering. In this regime, 
+    the similarity structure is not anchored to token indices and degrades when 
+    content-based cues are removed.
+
+  These two modes are not mutually exclusive; in practice, models may rely on both 
+  simultaneously to varying degrees. The key distinction is which signal dominates the 
+  similarity structure, and whether that structure survives disruption of content-based cues.
+\section{Methods}
+
+    \subsection{Residual Stream Geometry}
+    To analyze the evolution of internal representations across depth, we extract the residual stream at selected layers of the model (layers 0, 2, 4, and 9, where layer 9 corresponds to the final layer). At each layer, we represent the residual stream as a matrix
+    $R \in \mathbb{R}^{T \times C}$, where $T$ denotes the number of tokens and $C$ the embedding dimension. Each row of $R$ corresponds to the residual stream representation of a single token. We compute pairwise cosine similarities between all token representations in $R$ to form a token cosine similarity matrix, where the $(i,j)$-th entry corresponds to the cosine similarity between tokens $i$ and $j$. This matrix is symmetric by construction. We average the token cosine similarity matrix across the batch dimension to obtain a layer-wise summary of inter-token relationships, which serves as the basis for computing the Spatial Similarity Distance Correlation (SSDC).
+
+    \subsection{Spatial Similarity Distance Correlation}
+    To quantify and probe spatial structure in token representations, we introduce the Spatial Similarity Distance Correlation (SSDC). Let $T$ denote the number of patch tokens (excluding the CLS token), arranged on a $\sqrt{T} \times \sqrt{T}$ image grid. For a given layer, let $S \in \mathbb{R}^{T \times T}$ be the pairwise cosine similarity matrix between unit-normalized token representations. We associate each token $i$ with spatial coordinates $p_i \in \mathbb{Z}^2$ corresponding to its location on the image grid, and define the spatial distance matrix $D \in \mathbb{R}^{T \times T}$ by
+    \[
+    D_{ij} = \|p_i - p_j\|_1,
+    \]
+    where $\|\cdot\|_1$ denotes Manhattan distance. SSDC is defined as the Spearman rank correlation between representational similarity and negative spatial distance over all unordered token pairs:
+    \[
+    \mathrm{SSDC} = \rho_{\mathrm{Spearman}}\left(\{S_{ij}\}_{i < j},\ \{-D_{ij}\}_{i < j}\right).
+    \]
+    Higher SSDC values indicate that spatially proximate tokens tend to have more similar representations. We use Spearman rank correlation to remain agnostic to the precise functional form relating spatial distance and representational similarity.
+
+    Critically, SSDC is not used as a standalone metric — absolute values are insufficient to characterize learned spatial organization, as even untrained models exhibit non-trivial SSDC due to architectural and data priors (Section 4.1). Instead, we use SSDC in two ways: to track its \emph{evolution across depth} as a signature of learned spatial structure, and as a \emph{permutation-sensitivity probe} via the Random Permutation at Inference (RPI) intervention described below.
+
+    \subsection{Random Permutation at Inference (RPI)}
+    To distinguish absolute-position-based from content-based spatial organization, we apply random token permutation at inference time. Token representations are randomly shuffled while positional embedding indices remain fixed to their original spatial locations. Since token cosine similarity matrices are indexed according to token order, this permutation disrupts the correspondence between matrix proximity and spatial proximity. Consequently, any SSDC recovery observed after permutation cannot be attributed to content-based spatial organization and instead reflects the model's reliance on absolute token indices. Models that form spatial structure through patch content collapse to near-zero SSDC under RPI, while models that anchor spatial structure to absolute position indices exhibit meaningful SSDC recovery.
+
+    \subsection{Positional Embedding Magnitude Scaling}
+    To probe the causal relationship between positional signal strength, spatial organization strategy, and robustness, we scale the magnitude of learned positional embeddings at inference by a factor $\alpha \in \{0.25, 0.5, 0.75, 1.0\}$ without retraining. Formally, if $\mathbf{e}_i$ denotes the positional embedding for token $i$, the scaled embedding is $\alpha \cdot \mathbf{e}_i$. This continuously degrades the positional signal while preserving the model's learned weights, allowing us to measure how spatial strategy and robustness co-degrade under a single controlled manipulation. We apply this intervention to APE and SinuPE models; a direct analog for RoPE is architecturally non-trivial since RoPE encodes position through rotation angles applied to Q and K rather than additive vectors (there is no direct scalar parameter governing overall PE magnitude).
+
+    \subsection{Fragility Score}
+    To quantify a model's sensitivity to distributional shifts, we define a simple
+    \emph{Fragility Score} (FS), which measures the relative drop in top-1 accuracy
+    under distribution shift. It is defined as
+    \[
+    \mathrm{FS} = 1 - \frac{A_{\mathrm{shift}}}{A_{\mathrm{normal}}},
+    \]
+    where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote top-1 accuracy on the
+    normal and shifted datasets, respectively. Higher values indicate greater
+    performance degradation.
 
 
 \bibliographystyle{plainnat}
