@@ -55,3 +55,63 @@ SinuPE Summary: Similar overall performance (robustness and peak accuracy) to AP
 ---Overall Conclusion to Extract from SinuPE---
 
 I think this eliminates the prior hypothesis we had about absolute position spatial structure increasing rank, it seems as though that is something specific and special to APEs, since SinuPEs seem to share that same strategy (or at least something similar) but don't share the same high effective rank in the early layers. Additionally, it seems as though any type of positional encoding will suffise for the robustness increases. As long as the positional signal is consistent and usable, the model will form a spatial strategy that relies more heavily on spatial structure than pure content, thus becoming more robust. Effective rank on its own (as hypothesized before) seems to be totally disconnected from performance or robustness. It seems APE and effective rank are connected in some special way that I can't put my finger on quite yet.
+
+
+
+=================== PE MAGNITUDE SCALING EXPERIMENT =====================
+
+----- APE FIRST ------
+
+- Magnitude = 1.0:
+Mean Accuracy: 64%
+Mean Freq Accuracy: 43.5%
+Fragility Score: 0.319
+SSDC Recovery FULL
+
+Magnitude = 0.8:
+Mean Accuracy: 62.44%
+Mean Freq Accuracy: 41.52%
+Fragility Score: 0.33
+SSDC Recovery ???
+
+Magnitude = 0.75:
+Mean Accuracy: 61.74%
+Mean Freq Accuracy: 41%
+Fragility Score: 0.33
+SSDC Recovery ???
+
+Magnitude = 0.6:
+Mean Accuracy: 58.34%
+Mean Freq Accuracy: (something I forgot it doesn't matter)
+Fragility Score: 0.366
+SSDC Recovery ???
+
+Magnitude = 0.5:
+Mean Accuracy: 54.14%
+Mean Freq Accuracy: 33.2%
+Fragility Score: 0.386
+SSDC Recovery ???
+
+Magnitude = 0.4:
+Mean Accuracy: 48.62 %
+Mean Freq Accuracy: 29%
+Fragility Score: 0.4
+SSDC Recovery ???
+
+Magnitude = 0.3:
+Mean Accuracy: 43.4%
+Mean Freq Accuracy: 25%
+Fragility Score: 0.42
+SSDC Recovery ???
+
+Magnitude = 0.2:
+Mean Accuracy: 40%
+Mean Freq Accuracy: 22.18%
+Fragility Score: 0.45
+SSDC Recovery ???
+
+Magnitude = 0.1:
+Mean Accuracy: 38%
+Mean Freq Accuracy: 20%
+Fragility Score: 0.465
+SSDC Recovery ???
