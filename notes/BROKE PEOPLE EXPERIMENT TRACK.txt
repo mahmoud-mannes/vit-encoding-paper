@@ -60,58 +60,66 @@ I think this eliminates the prior hypothesis we had about absolute position spat
 
 =================== PE MAGNITUDE SCALING EXPERIMENT =====================
 
------ APE FIRST ------
+----- APE FIRST (intact2_imagenet100_60.pt) ------
 
-- Magnitude = 1.0:
-Mean Accuracy: 64%
+NOTATION for SSDC Recovery: SSDC at layer 0 (will always be 0 since SSDC when RPI at layer 0 is always 0) -> SSDC at layer 1 -> SSDC at layer 2 -> ...
+
+- PE Magnitude = 1.0:
+Mean Accuracy: ~64%
 Mean Freq Accuracy: 43.5%
 Fragility Score: 0.319
-SSDC Recovery FULL
+SSDC Recovery FULL (~0 -> 0.45 -> 0.47)
+
+Magnitude = 0.9:
+MEAN ACCURACY: 63.52%
+MEAN FREQ ACCURACY: 42.6%
+FRAGILITY SCORE: 0.328
+SSDC RECOVERY 0 -> 0.377 -> 0.41
 
 Magnitude = 0.8:
 Mean Accuracy: 62.44%
 Mean Freq Accuracy: 41.52%
 Fragility Score: 0.33
-SSDC Recovery ???
+SSDC Recovery 0 -> 0.27 -> 0.32
 
 Magnitude = 0.75:
 Mean Accuracy: 61.74%
 Mean Freq Accuracy: 41%
 Fragility Score: 0.33
-SSDC Recovery ???
+SSDC Recovery 0 -> 0.22 -> 0.27
 
 Magnitude = 0.6:
 Mean Accuracy: 58.34%
 Mean Freq Accuracy: (something I forgot it doesn't matter)
 Fragility Score: 0.366
-SSDC Recovery ???
+SSDC Recovery 0 -> 0.1
 
 Magnitude = 0.5:
 Mean Accuracy: 54.14%
 Mean Freq Accuracy: 33.2%
 Fragility Score: 0.386
-SSDC Recovery ???
+SSDC Recovery 0 -> 0.04
 
 Magnitude = 0.4:
 Mean Accuracy: 48.62 %
 Mean Freq Accuracy: 29%
 Fragility Score: 0.4
-SSDC Recovery ???
+SSDC Recovery 0.02 -> 0.03 (essentially negligible)
 
 Magnitude = 0.3:
 Mean Accuracy: 43.4%
 Mean Freq Accuracy: 25%
 Fragility Score: 0.42
-SSDC Recovery ???
+SSDC Recovery NONE (or exceptionally negligible)
 
 Magnitude = 0.2:
 Mean Accuracy: 40%
 Mean Freq Accuracy: 22.18%
 Fragility Score: 0.45
-SSDC Recovery ???
+SSDC Recovery NONE (or exceptionally negligible)
 
 Magnitude = 0.1:
 Mean Accuracy: 38%
 Mean Freq Accuracy: 20%
 Fragility Score: 0.465
-SSDC Recovery ???
+SSDC Recovery NONE (or exceptionally negligible)
