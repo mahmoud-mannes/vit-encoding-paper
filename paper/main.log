@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.26)  29 APR 2026 11:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.26)  30 APR 2026 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -568,61 +568,74 @@ Underfull \vbox (badness 6658) has occurred while \output is active []
 
  [3]
 [4]
-<../figures/SSDC_S51.pdf, id=165, 318.92612pt x 228.00833pt>
+<../figures/SSDC_S51.pdf, id=169, 318.92612pt x 228.00833pt>
 File: ../figures/SSDC_S51.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S51.pdf>
 Package pdftex.def Info: ../figures/SSDC_S51.pdf  used on input line 220.
 (pdftex.def)             Requested size: 186.81842pt x 133.56001pt.
-<../figures/SSDC_S52.pdf, id=166, 319.01646pt x 228.00833pt>
+<../figures/SSDC_S52.pdf, id=170, 319.01646pt x 228.00833pt>
 File: ../figures/SSDC_S52.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S52.pdf>
 Package pdftex.def Info: ../figures/SSDC_S52.pdf  used on input line 227.
 (pdftex.def)             Requested size: 186.81842pt x 133.52174pt.
  [5 <../figures/SSDC_S51.pdf> <../figures/SSDC_S52.pdf>]
-<../figures/SSDC_S53_IBSO.pdf, id=190, 326.38965pt x 228.00833pt>
+<../figures/SSDC_S53_IBSO.pdf, id=194, 326.38965pt x 228.00833pt>
 File: ../figures/SSDC_S53_IBSO.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S53_IBSO.pdf>
 Package pdftex.def Info: ../figures/SSDC_S53_IBSO.pdf  used on input line 267.
 (pdftex.def)             Requested size: 190.79109pt x 133.28516pt.
-<../figures/SSDC_S53_CBSO.pdf, id=191, 324.54774pt x 228.00833pt>
+<../figures/SSDC_S53_CBSO.pdf, id=195, 324.54774pt x 228.00833pt>
 File: ../figures/SSDC_S53_CBSO.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S53_CBSO.pdf>
 Package pdftex.def Info: ../figures/SSDC_S53_CBSO.pdf  used on input line 274.
 (pdftex.def)             Requested size: 190.79109pt x 134.03665pt.
- [6 <../figures/SSDC_S53_IBSO.pdf> <../figures/SSDC_S53_CBSO.pdf>] (./main.bbl 
-[7]) [8]
-(./checklist.tex [9] [10] [11] [12] [13] [14]) [15] (./main.aux)
+ [6 <../figures/SSDC_S53_IBSO.pdf> <../figures/SSDC_S53_CBSO.pdf>]
+<../figures/FS_GB_44.pdf, id=217, 245.718pt x 180.675pt>
+File: ../figures/FS_GB_44.pdf Graphic file (type pdf)
+<use ../figures/FS_GB_44.pdf>
+Package pdftex.def Info: ../figures/FS_GB_44.pdf  used on input line 306.
+(pdftex.def)             Requested size: 190.79109pt x 140.29459pt.
+<../figures/FS_JPEG_44.pdf, id=218, 245.718pt x 180.675pt>
+File: ../figures/FS_JPEG_44.pdf Graphic file (type pdf)
+<use ../figures/FS_JPEG_44.pdf>
+Package pdftex.def Info: ../figures/FS_JPEG_44.pdf  used on input line 313.
+(pdftex.def)             Requested size: 190.79109pt x 140.29459pt.
+ [7 <../figures/FS_GB_44.pdf> <../figures/FS_JPEG_44.pdf>] (./main.bbl [8]) [9]
+ [10] (./checklist.tex [11]
+[12] [13] [14] [15] [16]) [17] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BFA8C274157549A75B611DC1941D016C;3737.
+(rerunfilecheck)             Checksum: BE179912BEFAF6114F15F9707A303222;4155.
  ) 
 Here is how much of TeX's memory you used:
- 14530 strings out of 474222
- 232883 string characters out of 5748732
+ 14601 strings out of 474222
+ 234115 string characters out of 5748732
  1945975 words of memory out of 5000000
- 36231 multiletter control sequences out of 15000+600000
- 604207 words of font info for 250 fonts, out of 8000000 for 9000
+ 36279 multiletter control sequences out of 15000+600000
+ 608477 words of font info for 271 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,8n,79p,1001b,744s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,8n,79p,1001b,746s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/
-sftt1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (15 pages, 263020 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
+ymbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/times/utmri8a.pfb>
+Output written on main.pdf (17 pages, 305377 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
- 317 compressed objects within 4 object streams
- 72 named destinations out of 1000 (max. 500000)
- 48789 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 425 PDF objects out of 1000 (max. 8388607)
+ 346 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 500000)
+ 50855 words of extra memory for PDF output out of 51595 (max. 10000000)
 

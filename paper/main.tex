@@ -111,7 +111,7 @@
 Positional embeddings (PEs) in Vision Transformers (ViTs) are known to impact performance and robustness, but their role in shaping internal spatial representations is not well understood. In this work, we study how different forms of PEs influence the representational geometry of ViTs and its relationship to robustness.
 We introduce a metric, the Spatial Similarity Distance Correlation (SSDC), to quantify spatial structure in token representations. Using this metric, we show that ViTs trained without PEs still develop non-trivial spatial structure, but this structure is driven by visual content and collapses under token permutation.
 In contrast, we find that all PEs considered (learned absolute, sinusoidal, and rotary) induce a consistent shift toward an index-anchored spatial organization. Representations in these models remain stable under perturbations that disrupt content, and exhibit substantially improved robustness to distributional shifts.
-We further show that while different PEs produce distinct depth-wise trajectories of spatial structure, their robustness properties are largely similar, suggesting that robustness depends on the presence of a stable positional reference frame rather than the specific encoding mechanism.
+We further show that while different PEs produce distinct depth-wise trajectories of spatial structure, their robustness properties are largely similar, suggesting that robustness depends on the presence of a stable positional reference frame more than it depends on the specific encoding mechanism.
 These results offer a mechanistic account of how positional encodings shape internal representations, with implications for the principled design of future encoding schemes.
 \end{abstract}
 
@@ -122,7 +122,7 @@ While PEs are designed to provide positional information, this design does not d
 
 Prior work shows that ViTs retain substantial performance even when positional information is removed or degraded \citep{dosovitskiy2021an, chu2023conditional}, suggesting that spatial relationships can partially emerge from patch content alone. This raises a central question: if spatial structure can arise without explicit positional guidance, what functional role do positional embeddings play?
 
-Existing studies have largely addressed this question through downstream performance comparisons or architectural variations. While informative, these approaches provide limited insight into how positional information shapes internal representations. In particular, it remains unclear whether different positional encoding schemes—learned absolute, sinusoidal, or rotary—induce distinct spatial reasoning strategies, or whether their effects on robustness arise from a shared mechanism.
+Existing studies have largely addressed this question through downstream performance comparisons or architectural variations. While informative, these approaches provide limited insight into how positional information shapes internal representations. In particular, it remains unclear whether different positional encoding schemes (learned absolute, sinusoidal, or rotary) induce distinct spatial reasoning strategies, or whether their effects on robustness arise from a shared mechanism.
 
 In this work, we adopt a mechanistic perspective. We analyze the evolution of token representations across the transformer stack using tools from representational geometry \citep{raghu2021do}, introducing the Spatial Similarity Distance Correlation (SSDC) as a probe of spatial structure. Critically, we use SSDC in conjunction with a random permutation intervention at inference to distinguish whether spatial organization is anchored to token indices or driven by patch content. We compare models trained with learned absolute positional embeddings (APE), sinusoidal encodings, rotary embeddings (RoPE), and no positional embeddings, and evaluate their robustness to distributional shifts.
 
@@ -151,11 +151,11 @@ A separate line of work studies the geometry and dynamics of transformer represe
 
 \textbf{Robustness of Visual Models}
 
-Vision Transformers exhibit distinct robustness profiles compared to convolutional networks. Prior work shows that transformers are generally more robust to certain spatial perturbations but can be more sensitive to texture-based changes \citep{Bhojanapalli2021robust}. Additional studies report favorable out-of-distribution generalization properties for ViTs \citep{Paul_Chen_2022}, connecting to broader findings on shape versus texture bias in visual recognition \citep{geirhos2018imagenettrained}. While the impact of positional embeddings on robustness has been observed (particularly that models trained with PEs exhibit better robustness profiles than models trained without them) \citep{Mao2021TowardsRV}, the relationship between a model’s spatial organization strategy—whether anchored to absolute position or inferred from content—and its robustness to distributional shifts remains poorly understood.
+Vision Transformers exhibit distinct robustness profiles compared to convolutional networks. Prior work shows that transformers are generally more robust to certain spatial perturbations but can be more sensitive to texture-based changes \citep{Bhojanapalli2021robust}. Additional studies report favorable out-of-distribution generalization properties for ViTs \citep{Paul_Chen_2022}, connecting to broader findings on shape versus texture bias in visual recognition \citep{geirhos2018imagenettrained}. While the impact of positional embeddings on robustness has been observed (particularly that models trained with PEs exhibit better robustness profiles than models trained without them) \citep{Mao2021TowardsRV}, the relationship between a model’s spatial organization strategy (whether anchored to absolute position or inferred from content) and its robustness to distributional shifts remains poorly understood.
 
 \textbf{Our Contribution}
 
-We connect these lines of work by showing that positional embeddings induce a shift toward index-based spatial organization, and that this shift—rather than the specific encoding mechanism—is the dominant factor underlying robustness. Using SSDC and controlled permutation interventions (RPT and RPI), we provide a mechanistic account of how positional information shapes internal representations and why it improves robustness beyond merely breaking permutation invariance.
+We connect these lines of work by showing that positional embeddings induce a shift toward index-based spatial organization, and that this shift (rather than the specific encoding mechanism) is the dominant factor underlying robustness. Using SSDC and controlled permutation interventions (RPT and RPI), we provide a mechanistic account of how positional information shapes internal representations and why it improves robustness beyond merely breaking permutation invariance.
 
 \section{Preliminaries}
 
@@ -296,6 +296,47 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
     RPT models, despite having positional embeddings present, fail to exhibit meaningful SSDC recovery under RPI, behaving similarly to fully ablated models. This demonstrates that the mere presence of positional embeddings is insufficient; a consistent mapping between token indices and spatial locations during training is required for index-based spatial organization to emerge.
 
     Taken together, these results establish that positional embeddings induce a shift from content-based to index-based spatial organization, and that this shift depends critically on the stability of the positional reference frame rather than on the architectural presence of positional signals alone.
+
+  \subsection{Robustness to Content-Preserving and Content-Disrupting Perturbations}
+
+    \begin{figure*}[t]
+      \centering
+      \begin{subfigure}[t]{0.48\textwidth}
+          \centering
+          \includegraphics[width=\linewidth]{../figures/FS_GB_44.pdf}
+          \caption{\textbf{Gaussian Blur ($\sigma = 2.5$).} Fragility scores under a mild perturbation that removes high-frequency detail while largely preserving global spatial structure. Differences between models are present but compressed, reflecting the weaker disruption of content-based cues.}
+          \label{fig:fs_blur}
+      \end{subfigure}
+      \hfill
+      \begin{subfigure}[t]{0.48\textwidth}
+          \centering
+          \includegraphics[width=\linewidth]{../figures/FS_JPEG_44.pdf}
+          \caption{\textbf{JPEG Compression (quality = 5).} Fragility scores under a strong content-disrupting transformation. Models with positional encodings exhibit substantially lower fragility than ablated and RPT models, with RoPE achieving the lowest fragility overall.}
+          \label{fig:fs_jpeg}
+      \end{subfigure}
+      \caption{\textbf{Robustness to distributional shifts.} Fragility scores across model variants under two perturbation regimes. The gap between models with and without a stable positional reference frame is most pronounced under strong content disruption (JPEG), while remaining consistent but attenuated under milder perturbations (Gaussian blur).}
+      \label{fig:fragility}
+    \end{figure*}
+    
+    \textbf{Experimental Setup:}
+    To evaluate how spatial organization strategy influences robustness, we measure model performance under controlled distribution shifts that perturb image content while preserving global structure. We consider two transformations with distinct characteristics:
+
+    \textbf{JPEG Compression:} We apply aggressive JPEG compression (quality = 5), which introduces blocking artifacts and significantly degrades local texture statistics. This transformation strongly disrupts content-based cues while preserving coarse spatial layout, making it a targeted probe of reliance on local visual features.
+
+    \textbf{Gaussian Blur:} We apply Gaussian blur with standard deviation $\sigma = 2.5$, which attenuates high-frequency information while largely preserving low-frequency spatial structure. Compared to JPEG compression, this constitutes a milder perturbation that degrades fine-grained detail without substantially altering global organization.
+
+    For each model, we compute the \emph{Fragility Score} (FS), defined as the relative drop in accuracy under each transformation.
+
+    In addition to standard positional encoding (PE) variants, we include \textbf{Random Permutation Training (RPT)} as a critical control condition. As mentioned in the subsection before, RPT preserves the architectural presence of PEs but models trained under RPT cannot form a stable index-based spatial organization despite having access to positional signals. This allows us to isolate whether robustness mainly arises from the mere presence of PEs or from the emergence of a consistent positional reference frame.
+
+    \textbf{Results:}
+    Under JPEG compression, we observe a clear separation between models that develop index-based spatial organization and those that do not. Models with positional encodings exhibit substantially lower fragility (APE and sinusoidal: $\sim$0.43, RoPE: $\sim$0.30) compared to ablated and RPT models ($\sim$0.66). This large gap indicates that the presence of a stable positional reference frame is the dominant factor governing robustness to severe content degradation. Furthermore, within PE-based models, RoPE consistently achieves lower fragility than APE and sinusoidal encodings, suggesting that the specific encoding mechanism can modulate robustness, albeit to a lesser extent than the presence of positional structure itself.
+
+    Under Gaussian blur, the same ordering of models is preserved but with attenuated differences (RoPE: $\sim$0.15, APE: $\sim$0.17--0.20, sinusoidal: $\sim$0.22, RPT: $\sim$0.25, ablated: $\sim$0.30). This compression of the fragility gap is consistent with the milder nature of the perturbation: because Gaussian blur preserves much of the global spatial structure, it provides a weaker test of reliance on content-based spatial cues. Consequently, while index-based models remain more robust, the advantage is less pronounced than under JPEG compression.
+
+    Taken together, these results support a two-level interpretation. First, the emergence of a stable positional reference frame (enabled by consistent positional embeddings and absent in both ablated and RPT models) is the primary determinant of robustness to distributional shifts. Second, the specific form of positional encoding introduces secondary variation within this regime, with RoPE exhibiting consistently lower fragility, potentially due to its ability to maintain spatial structure more effectively across depth.
+
+    Crucially, the poor robustness of RPT models demonstrates that the mere presence of positional embeddings is insufficient: robustness depends on the model learning a consistent mapping between token indices and spatial locations. This directly links the spatial organization strategy identified in earlier sections to downstream robustness behavior.
 \bibliographystyle{plainnat}
 \bibliography{references}
 
