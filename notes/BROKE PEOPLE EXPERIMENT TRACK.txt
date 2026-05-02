@@ -60,66 +60,258 @@ I think this eliminates the prior hypothesis we had about absolute position spat
 
 =================== PE MAGNITUDE SCALING EXPERIMENT =====================
 
------ APE FIRST (intact2_imagenet100_60.pt) ------
+----- APE FIRST ------
 
 NOTATION for SSDC Recovery: SSDC at layer 0 (will always be 0 since SSDC when RPI at layer 0 is always 0) -> SSDC at layer 1 -> SSDC at layer 2 -> ...
 
+
+
+-- APE 1 --
+
 - PE Magnitude = 1.0:
-Mean Accuracy: ~64%
-Mean Freq Accuracy: 43.5%
-Fragility Score: 0.319
-SSDC Recovery FULL (~0 -> 0.45 -> 0.47)
+Mean Accuracy: 63.92%
+Mean Freq Accuracy: 35.6%
+Fragility Score: 0.44
+SSDC Recovery FULL (~0 -> 0.47)
 
 Magnitude = 0.9:
-MEAN ACCURACY: 63.52%
-MEAN FREQ ACCURACY: 42.6%
-FRAGILITY SCORE: 0.328
-SSDC RECOVERY 0 -> 0.377 -> 0.41
+MEAN ACCURACY: 63.3%
+MEAN FREQ ACCURACY: 33.8%
+FRAGILITY SCORE: 0.46
+SSDC RECOVERY 0 -> 0.377
+
+Magnitude = 0.8:
+Mean Accuracy: 62.42%
+Mean Freq Accuracy: 31.92%
+Fragility Score: 0.488
+SSDC Recovery 0 -> 0.3
+
+Magnitude = 0.7:
+Mean Accuracy: 61%
+Mean Freq Accuracy: 28.66%
+Fragility Score: 0.53
+SSDC Recovery 0 -> 0.19
+
+Magnitude = 0.6:
+Mean Accuracy: 58.38%
+Mean Freq Accuracy: 24.64%
+Fragility Score: 0.578
+SSDC Recovery 0 -> 0.1
+
+Magnitude = 0.5:
+Mean Accuracy: 54.2%
+Mean Freq Accuracy: 20%
+Fragility Score: 0.625
+SSDC Recovery 0 -> 0.02
+
+Magnitude = 0.4:
+Mean Accuracy: 49.1 %
+Mean Freq Accuracy: 16.67%
+Fragility Score: 0.65
+SSDC Recovery NONE
+
+Magnitude = 0.3:
+Mean Accuracy: 43.4%
+Mean Freq Accuracy: 14.38%
+Fragility Score: 0.668
+SSDC Recovery NONE (or exceptionally negligible)
+
+Magnitude = 0.2:
+Mean Accuracy: 39.9%
+Mean Freq Accuracy: 12.8%
+Fragility Score: 0.679
+SSDC Recovery NONE (or exceptionally negligible)
+
+Magnitude = 0.1:
+Mean Accuracy: 37.2%
+Mean Freq Accuracy: (I FORGOT BUT CAN BE CALCULATED FROM MAIN ACCURACY AND FRAGILITY SCORE)
+Fragility Score: 0.685
+SSDC Recovery NONE (or exceptionally negligible)
+
+
+
+--APE 2--
+
+- PE Magnitude = 1.0:
+Mean Accuracy: 64%
+Mean Freq Accuracy: 35.1%
+Fragility Score: 0.45
+SSDC Recovery FULL (0 -> 0.46)
+
+Magnitude = 0.9:
+MEAN ACCURACY: 63.5%
+MEAN FREQ ACCURACY: 33.6%
+FRAGILITY SCORE: 0.47	
+SSDC RECOVERY 0 -> 0.38
 
 Magnitude = 0.8:
 Mean Accuracy: 62.44%
-Mean Freq Accuracy: 41.52%
-Fragility Score: 0.33
-SSDC Recovery 0 -> 0.27 -> 0.32
+Mean Freq Accuracy: 31.42%
+Fragility Score: 0.496
+SSDC Recovery 0 -> 0.32
 
-Magnitude = 0.75:
-Mean Accuracy: 61.74%
-Mean Freq Accuracy: 41%
-Fragility Score: 0.33
-SSDC Recovery 0 -> 0.22 -> 0.27
+Magnitude = 0.7:
+Mean Accuracy: 60.4%
+Mean Freq Accuracy: 28.46%
+Fragility Score: 0.528
+SSDC Recovery 0 -> 0.16
 
 Magnitude = 0.6:
 Mean Accuracy: 58.34%
-Mean Freq Accuracy: (something I forgot it doesn't matter)
-Fragility Score: 0.366
+Mean Freq Accuracy: 24.74%
+Fragility Score: 0.575
 SSDC Recovery 0 -> 0.1
 
 Magnitude = 0.5:
 Mean Accuracy: 54.14%
-Mean Freq Accuracy: 33.2%
-Fragility Score: 0.386
-SSDC Recovery 0 -> 0.04
+Mean Freq Accuracy: 21.3%
+Fragility Score: 0.605
+SSDC Recovery 0 -> 0.02 (delta SSDC is technically 0.05, because at layer 0 SSDC is -0.03)
 
 Magnitude = 0.4:
 Mean Accuracy: 48.62 %
-Mean Freq Accuracy: 29%
-Fragility Score: 0.4
-SSDC Recovery 0.02 -> 0.03 (essentially negligible)
+Mean Freq Accuracy: 17.64%
+Fragility Score: 0.637
+SSDC Recovery NONE
 
 Magnitude = 0.3:
 Mean Accuracy: 43.4%
-Mean Freq Accuracy: 25%
-Fragility Score: 0.42
+Mean Freq Accuracy: 15.48%
+Fragility Score: 0.643
 SSDC Recovery NONE (or exceptionally negligible)
 
 Magnitude = 0.2:
-Mean Accuracy: 40%
-Mean Freq Accuracy: 22.18%
-Fragility Score: 0.45
+Mean Accuracy: 40.3%
+Mean Freq Accuracy: 14%
+Fragility Score: 0.65
 SSDC Recovery NONE (or exceptionally negligible)
 
 Magnitude = 0.1:
 Mean Accuracy: 38%
-Mean Freq Accuracy: 20%
-Fragility Score: 0.465
+Mean Freq Accuracy: 12.92%
+Fragility Score: 0.66
+SSDC Recovery NONE (or exceptionally negligible)
+
+--APE 3--
+
+- PE Magnitude = 1.0:
+Mean Accuracy: 63.9%
+Mean Freq Accuracy: 37.3%
+Fragility Score: 0.416
+SSDC Recovery FULL (0 -> 0.51)
+
+Magnitude = 0.9:
+MEAN ACCURACY: 63.22%
+MEAN FREQ ACCURACY: 35.5%
+FRAGILITY SCORE: 0.438
+SSDC RECOVERY (0 -> 0.433)
+
+Magnitude = 0.8:
+Mean Accuracy: 62.6%
+Mean Freq Accuracy: 33.3%
+Fragility Score: 0.468
+SSDC Recovery 0 -> 0.35
+
+Magnitude = 0.7:
+Mean Accuracy: 60.7%
+Mean Freq Accuracy: 30.3%
+Fragility Score: 0.5
+SSDC Recovery 0 -> 0.238
+
+Magnitude = 0.6:
+Mean Accuracy: 57.36%
+Mean Freq Accuracy: 26.22%
+Fragility Score: 0.54
+SSDC Recovery 0 -> 0.11
+
+Magnitude = 0.5:
+Mean Accuracy: 52%
+Mean Freq Accuracy: 22.3%
+Fragility Score: 0.57
+SSDC Recovery 0 -> 0.06
+
+Magnitude = 0.4:
+Mean Accuracy: 46.22%
+Mean Freq Accuracy: 18.5%
+Fragility Score: 0.599
+SSDC Recovery NONE
+
+Magnitude = 0.3:
+Mean Accuracy: 41.64%
+Mean Freq Accuracy: 15.6%
+Fragility Score: 0.62
+SSDC Recovery NONE (or exceptionally negligible)
+
+Magnitude = 0.2:
+Mean Accuracy: 38.14%
+Mean Freq Accuracy: 14.42%
+Fragility Score: 0.62
+SSDC Recovery NONE (or exceptionally negligible)
+
+Magnitude = 0.1:
+Mean Accuracy: 35.8%
+Mean Freq Accuracy: 13.7%
+Fragility Score: 0.617
+SSDC Recovery NONE (or exceptionally negligible)
+
+--APE 4--
+
+- PE Magnitude = 1.0:
+Mean Accuracy: 64.36%
+Mean Freq Accuracy: 36.7%
+Fragility Score: 0.429
+SSDC Recovery FULL 0 -> 0.45
+
+Magnitude = 0.9:
+MEAN ACCURACY: 63.4%
+MEAN FREQ ACCURACY: 35.2%
+FRAGILITY SCORE: 0.44
+SSDC RECOVERY 0 -> 0.35
+
+Magnitude = 0.8:
+Mean Accuracy: 62.08%
+Mean Freq Accuracy: 33.18%
+Fragility Score: 0.46
+SSDC Recovery 0 -> 0.28
+
+Magnitude = 0.7:
+Mean Accuracy: 60%
+Mean Freq Accuracy: 30%
+Fragility Score: 0.5
+SSDC Recovery 0 -> 0.15
+
+Magnitude = 0.6:
+Mean Accuracy: 58.36%
+Mean Freq Accuracy: 26.46%
+Fragility Score: 0.546
+SSDC Recovery 0 -> 0.07
+
+Magnitude = 0.5:
+Mean Accuracy: 54.6%
+Mean Freq Accuracy: 22.1%
+Fragility Score: 0.59
+SSDC Recovery 0 -> 0.04
+
+Magnitude = 0.4:
+Mean Accuracy: 48.8%
+Mean Freq Accuracy: 18.3%
+Fragility Score: 0.623
+SSDC Recovery NONE
+
+Magnitude = 0.3:
+Mean Accuracy: 43.3%
+Mean Freq Accuracy: 15.6%
+Fragility Score: 0.639
+SSDC Recovery NONE (or exceptionally negligible)
+
+Magnitude = 0.2:
+Mean Accuracy: 39.44%
+Mean Freq Accuracy: 14.04%
+Fragility Score: 0.644
+SSDC Recovery NONE (or exceptionally negligible)
+
+Magnitude = 0.1:
+Mean Accuracy: 37.06%
+Mean Freq Accuracy: 13.08%
+Fragility Score: 0.647
 SSDC Recovery NONE (or exceptionally negligible)

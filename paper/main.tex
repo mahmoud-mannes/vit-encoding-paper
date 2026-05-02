@@ -253,7 +253,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
 
     In contrast, the trained ablated model shows a markedly different behavior. Starting from a lower initial SSDC, it exhibits a rapid increase in early layers, followed by continued growth across depth. This dynamic pattern closely resembles the qualitative trajectory observed in the trained model with positional embeddings, despite the absence of any explicit positional signal. The key distinction is not the absolute magnitude of SSDC, but the rate and structure of its evolution: whereas the untrained model shows only a shallow, near-static progression, the trained ablated model displays sharp, structured changes indicative of learning.
 
-    These observations suggest that training induces non-trivial spatial structure even without positional embeddings. This interpretation is further supported by the non-trivial performance of ablated models and by prior findings that transformers can recover positional information implicitly. Taken together, the evidence indicates that spatial organization can emerge from content alone.
+    These observations suggest that training induces non-trivial spatial structure even without positional embeddings. This interpretation is further supported by the non-trivial performance of ablated models and by prior findings that transformers can recover positional information implicitly. Taken together, the evidence indicates that spatial organization can emerge even without an explicit positional signal.
 
     Importantly, we do not claim that this emergent structure is equivalent in nature or quality to that induced by positional embeddings. Rather, this result establishes that spatial structure can arise without explicit positional signals, motivating the need for a more precise characterization of its underlying mechanism, which we address in the following section.
 
@@ -337,6 +337,36 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
     Taken together, these results support a two-level interpretation. First, the emergence of a stable positional reference frame (enabled by consistent positional embeddings and absent in both ablated and RPT models) is the primary determinant of robustness to distributional shifts. Second, the specific form of positional encoding introduces secondary variation within this regime, with RoPE exhibiting consistently lower fragility, potentially due to its ability to maintain spatial structure more effectively across depth.
 
     Crucially, the poor robustness of RPT models demonstrates that the mere presence of positional embeddings is insufficient: robustness depends on the model learning a consistent mapping between token indices and spatial locations. This directly links the spatial organization strategy identified in earlier sections to downstream robustness behavior.
+
+  \subsection{Linking Index-Based Spatial Organization to Robustness via Positional Scaling}
+
+    \textbf{Experimental Setup:}
+    To establish a causal link between spatial organization and robustness, we require a controlled intervention that selectively disrupts index-based spatial structure while preserving the rest of the model. We achieve this by scaling the magnitude of learned absolute positional embeddings (APE) at inference time by a factor $\alpha \in [0,1]$, without retraining.
+
+    While this intervention operates on positional embeddings, our goal is not to study positional signal strength per se, but to use it as a mechanism to continuously degrade the model’s \emph{index-based spatial organization}. To measure the integrity of this organization, we evaluate Spatial Similarity Distance Correlation (SSDC) under Random Permutation at Inference (RPI), as introduced in Section~5.3. Under RPI, any recovered spatial structure must be anchored to token indices rather than content. We therefore interpret SSDC recovery as a proxy for the presence of index-based spatial organization.
+
+    Importantly, SSDC recovery approaching zero does not imply that the model is actively constructing a content-based spatial structure; rather, it indicates that index-based spatial organization is no longer preserved under permutation.
+
+    To summarize this behavior compactly, we define:
+    \[
+    \Delta \mathrm{SSDC} = \mathrm{SSDC}_{\text{layer }1} - \mathrm{SSDC}_{\text{layer }0},
+    \]
+    which captures the immediate recovery of spatial structure after the first encoder block under RPI. Since SSDC at layer 0 is identically zero under permutation, $\Delta \mathrm{SSDC}$ serves as a direct measure of early-layer index-based spatial organization.
+
+    We jointly analyze $\Delta \mathrm{SSDC}$ and the Fragility Score (FS) across varying $\alpha$. For clarity, we report representative magnitudes illustrating distinct regimes, with the full results provided in the Appendix.
+
+    \textbf{Results:}
+    We observe a clear correspondence between the degradation of index-based spatial organization and the loss of robustness.
+
+    At high magnitudes ($\alpha \geq 0.9$), models exhibit strong SSDC recovery ($\Delta \mathrm{SSDC} \approx 0.37$–$0.47$), indicating intact index-based spatial organization. In this regime, fragility remains relatively low and stable (FS $\approx 0.44$–$0.46$), suggesting that robustness is preserved when spatial structure is intact.
+
+    As $\alpha$ decreases into an intermediate regime ($0.8 \geq \alpha \geq 0.5$), SSDC recovery drops sharply ($\Delta \mathrm{SSDC} \approx 0.30 \rightarrow 0.02$), reflecting the progressive breakdown of index-based spatial organization. This degradation is accompanied by a pronounced increase in fragility (FS $\approx 0.48 \rightarrow 0.63$). Notably, the most significant increases in fragility occur precisely where SSDC recovery is actively decreasing, indicating that robustness degradation is tightly coupled to the loss of spatial structure.
+
+    Below a critical threshold ($\alpha \leq 0.4$), SSDC recovery collapses to zero ($\Delta \mathrm{SSDC} \approx 0$), indicating that index-based spatial organization is no longer recoverable under permutation. In this regime, fragility continues to increase, but only marginally (FS $\approx 0.65 \rightarrow 0.685$). This suggests that once spatial organization is fully disrupted, further degradation in robustness is no longer driven by changes in spatial structure, but instead reflects secondary effects such as reduced representational quality or distribution mismatch induced by scaling.
+
+    A complementary effect is observed at high magnitudes: when index-based spatial organization is already fully intact, small reductions in $\alpha$ have limited impact on fragility. Together, these observations reveal three regimes: (1) a stable regime with intact spatial organization and low fragility, (2) a transition regime where spatial structure degrades and fragility increases sharply, and (3) a collapsed regime where spatial organization is absent and fragility plateaus.
+
+    Overall, these results provide causal evidence that robustness is governed by the presence of index-based spatial organization. Positional scaling serves only as a means of intervention; the observed changes in robustness track the degradation of spatial structure rather than the magnitude of the positional signal itself.
 \bibliographystyle{plainnat}
 \bibliography{references}
 
