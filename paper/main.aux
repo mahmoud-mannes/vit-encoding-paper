@@ -29,8 +29,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Residual Stream Geometry}{4}{subsection.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Spatial Similarity Distance Correlation}{4}{subsection.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Random Permutation at Inference (RPI)}{4}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Positional Embedding Magnitude Scaling}{4}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Fragility Score}{4}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Random Permutation during Training (RPT)}{4}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Positional Embedding Magnitude Scaling}{4}{subsection.4.5}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:SSDC1}{{1a}{5}{\textbf {Evolution of SSDC across depth on untrained ablated models}}{figure.caption.2}{}}
 \newlabel{sub@fig:SSDC1}{{a}{5}{\textbf {Evolution of SSDC across depth on untrained ablated models}}{figure.caption.2}{}}
@@ -38,6 +38,7 @@
 \newlabel{sub@fig:SSDC2}{{b}{5}{\textbf {Evolution of SSDC across depth for on untrained ablated models, trained ablated models, and intact (trained with APE) models}}{figure.caption.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces (a) SSDC grows weakly and remains at a relatively high value across layers, indicating static spatial correlations induced by architectural and data priors rather than learning. \newline  (b) While untrained ablated models exhibit relatively high but slowly varying SSDC consistent with static data and architectural priors, trained ablated models display a sharp increase in early layers, indicating the emergence of learned spatial structure despite the absence of explicit positional encoding. }}{5}{figure.caption.2}\protected@file@percent }
 \newlabel{fig:SSDC}{{1}{5}{(a) SSDC grows weakly and remains at a relatively high value across layers, indicating static spatial correlations induced by architectural and data priors rather than learning. \newline (b) While untrained ablated models exhibit relatively high but slowly varying SSDC consistent with static data and architectural priors, trained ablated models display a sharp increase in early layers, indicating the emergence of learned spatial structure despite the absence of explicit positional encoding}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Fragility Score}{5}{subsection.4.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Results}{5}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Architectural Priors Induce Static Spatial Correlations at Initialization}{5}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Emergence of Spatial Structure Without Positional Encoding}{5}{subsection.5.2}\protected@file@percent }
@@ -56,6 +57,9 @@
 \newlabel{fig:fragility}{{3}{7}{\textbf {Robustness to distributional shifts.} Fragility scores across model variants under two perturbation regimes. The gap between models with and without a stable positional reference frame is most pronounced under strong content disruption (JPEG), while remaining consistent but attenuated under milder perturbations (Gaussian blur)}{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Robustness to Content-Preserving and Content-Disrupting Perturbations}{7}{subsection.5.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Linking Index-Based Spatial Organization to Robustness via Positional Scaling}{8}{subsection.5.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  Effect of positional embedding magnitude $\alpha $ on index-based spatial organization and robustness. $\Delta $SSDC (measured under RPI) captures the recovery of index-based spatial structure after the first encoder block. As $\alpha $ decreases, $\Delta $SSDC collapses, indicating the breakdown of index-based spatial organization, while fragility increases sharply in the same regime before plateauing once spatial structure is lost. }}{9}{table.caption.5}\protected@file@percent }
+\newlabel{tab:pe_scaling}{{1}{9}{Effect of positional embedding magnitude $\alpha $ on index-based spatial organization and robustness. $\Delta $SSDC (measured under RPI) captures the recovery of index-based spatial structure after the first encoder block. As $\alpha $ decreases, $\Delta $SSDC collapses, indicating the breakdown of index-based spatial organization, while fragility increases sharply in the same regime before plateauing once spatial structure is lost}{table.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Limitations}{9}{section.6}\protected@file@percent }
 \bibstyle{plainnat}
 \bibdata{references}
 \bibcite{Bhojanapalli2021robust}{{1}{2021}{{Bhojanapalli et~al.}}{{Bhojanapalli, Chakrabarti, Glasner, Li, Unterthiner, and Veit}}}
@@ -66,6 +70,7 @@
 \bibcite{elhage2021mathematical}{{6}{2021}{{Elhage et~al.}}{{Elhage, Nanda, Olsson, Henighan, Joseph, Mann, Askell, Bai, Chen, Conerly, DasSarma, Drain, Ganguli, Hatfield-Dodds, Hernandez, Jones, Kernion, Lovitt, Ndousse, Amodei, Brown, Clark, Kaplan, McCandlish, and Olah}}}
 \bibcite{geirhos2018imagenettrained}{{7}{2019}{{Geirhos et~al.}}{{Geirhos, Rubisch, Michaelis, Bethge, Wichmann, and Brendel}}}
 \bibcite{Heo2024RoPE}{{8}{2024}{{Heo et~al.}}{{Heo, Park, Han, and Yun}}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{10}{section.7}\protected@file@percent }
 \bibcite{Islam*2020How}{{9}{2020}{{Islam* et~al.}}{{Islam*, Jia*, and Bruce}}}
 \bibcite{kazemnejad2023the}{{10}{2023}{{Kazemnejad et~al.}}{{Kazemnejad, Padhi, Natesan, Das, and Reddy}}}
 \bibcite{kobayashi-etal-2021-incorporating}{{11}{2021}{{Kobayashi et~al.}}{{Kobayashi, Kuribayashi, Yokoi, and Inui}}}
@@ -73,5 +78,8 @@
 \bibcite{Mao2021TowardsRV}{{13}{2021}{{Mao et~al.}}{{Mao, Qi, Chen, Li, Duan, Ye, He, and Xue}}}
 \bibcite{Paul_Chen_2022}{{14}{2022}{{Paul and Chen}}{{}}}
 \bibcite{raghu2021do}{{15}{2021}{{Raghu et~al.}}{{Raghu, Unterthiner, Kornblith, Zhang, and Dosovitskiy}}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Technical appendices and supplementary material}{11}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Experimental Setup and Hyperparameters}{11}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Technical appendices and supplementary material}{11}{appendix.B}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Model architecture and training hyperparameters used in all experiments.}}{12}{table.caption.7}\protected@file@percent }
+\newlabel{tab:hyperparams}{{2}{12}{Model architecture and training hyperparameters used in all experiments}{table.caption.7}{}}
 \gdef \@abspage@last{18}
