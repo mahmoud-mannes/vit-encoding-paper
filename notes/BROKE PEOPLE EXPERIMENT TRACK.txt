@@ -346,3 +346,92 @@ Mag   | Mean     | Std Dev
 0.3   | 0.6425   | 0.0171  
 0.2   | 0.6483   | 0.0210  
 0.1   | 0.6522   | 0.0245  
+
+
+-------------- SINGULAR SINUPE SEED SCALING EXPERIMENT -------------
+
+========== MAGNITUDE: 1.0 ========== 
+
+Mean accuracy = 0.6474
+Mean JPEG accuracy = 0.3616
+JPEG Fragility Score = 0.441458140253321
+SSDC RECOVERY: 0.22 -> 0.51
+--------------------
+--------------------
+========== MAGNITUDE: 0.9 ========== 
+
+Mean accuracy = 0.6460000000000001
+Mean JPEG accuracy = 0.35359999999999997
+JPEG Fragility Score = 0.4526315789473686
+SSDC RECOVERY: 0.19 -> 0.47
+--------------------
+--------------------
+========== MAGNITUDE: 0.8 ========== 
+
+Mean accuracy = 0.6448
+Mean JPEG accuracy = 0.34340000000000004
+JPEG Fragility Score = 0.4674317617866005
+SSDC RECOVERY: 0.19 -> 0.44
+--------------------
+--------------------
+========== MAGNITUDE: 0.7 ========== 
+
+Mean accuracy = 0.643
+Mean JPEG accuracy = 0.32999999999999996
+JPEG Fragility Score = 0.48678071539657863
+SSDC RECOVERY: 0.16 -> 0.4
+--------------------
+--------------------
+========== MAGNITUDE: 0.6 ========== 
+
+Mean accuracy = 0.633
+Mean JPEG accuracy = 0.31239999999999996
+JPEG Fragility Score = 0.5064770932069511
+SSDC RECOVERY: 0.08 -> 0.33
+--------------------
+--------------------
+========== MAGNITUDE: 0.5 ========== 
+
+Mean accuracy = 0.6176
+Mean JPEG accuracy = 0.2962
+JPEG Fragility Score = 0.5204015544041452
+SSDC RECOVERY: 0.04 -> 0.25
+--------------------
+--------------------
+========== MAGNITUDE: 0.4 ========== 
+
+Mean accuracy = 0.6033999999999999
+Mean JPEG accuracy = 0.27199999999999996
+JPEG Fragility Score = 0.5492210805435864
+SSDC RECOVERY: 0.04 -> 0.21
+--------------------
+--------------------
+========== MAGNITUDE: 0.3 ========== 
+
+Mean accuracy = 0.5650000000000001
+Mean JPEG accuracy = 0.2398
+JPEG Fragility Score = 0.575575221238938
+SSDC RECOVERY: 0.03 -> 0.16
+--------------------
+--------------------
+========== MAGNITUDE: 0.2 ========== 
+
+Mean accuracy = 0.5122
+Mean JPEG accuracy = 0.20020000000000002
+JPEG Fragility Score = 0.6091370558375634
+SSDC RECOVERY: 0 -> 0.07
+--------------------
+--------------------
+========== MAGNITUDE: 0.1 ========== 
+
+Mean accuracy = 0.4194
+Mean JPEG accuracy = 0.1528
+JPEG Fragility Score = 0.6356700047687172
+SSDC RECOVERY: 0.015 -> 0.037
+
+
+(
+LLMs were only used for editing (grammar, word choices, etc..) or drafting initial sections of the paper (thereby speeding up the writing process).
+)
+
+As a note, in the email you sent us you clarified that a qualified reciprocal reviewer is "an author with at least one first-author paper on mechanistic interpretability (including this submission)". By this definition, I fit the criteria because I am a first-author on an ICML submission (that has been withdrawn), and a first-author on another NeurIPS submission, and the first-author on this paper.

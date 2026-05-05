@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -19,6 +19,13 @@ Xiangxiang Chu, Zhi Tian, Bo~Zhang, Xinlong Wang, and Chunhua Shen.
 \newblock In \emph{The Eleventh International Conference on Learning
   Representations}, 2023.
 \newblock URL \url{https://openreview.net/forum?id=3KWnuT-R1bh}.
+
+\bibitem[Deng et~al.(2009)Deng, Dong, Socher, Li, Li, and Fei-Fei]{5206848}
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li~Fei-Fei.
+\newblock Imagenet: A large-scale hierarchical image database.
+\newblock In \emph{2009 IEEE Conference on Computer Vision and Pattern
+  Recognition}, pages 248--255, 2009.
+\newblock \doi{10.1109/CVPR.2009.5206848}.
 
 \bibitem[Dong et~al.(2021)Dong, Cordonnier, and Loukas]{pmlr-v139-dong21a}
 Yihe Dong, Jean-Baptiste Cordonnier, and Andreas Loukas.

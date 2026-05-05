@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.26)  3 MAY 2026 13:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.26)  5 MAY 2026 10:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -348,6 +348,76 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks27
 \@floatcapt=\box54
 )
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip59
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks28
+\ex@=\dimen174
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen175
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count291
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count292
+\leftroot@=\count293
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count294
+\DOTSCASE@=\count295
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box55
+\strutbox@=\box56
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen176
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count296
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count297
+\dotsspace@=\muskip17
+\c@parentequation=\count298
+\dspbrk@lvl=\count299
+\tag@help=\toks29
+\row@=\count300
+\column@=\count301
+\maxfields@=\count302
+\andhelp@=\toks30
+\eqnshift@=\dimen177
+\alignsep@=\dimen178
+\tagshift@=\dimen179
+\tagwidth@=\dimen180
+\totwidth@=\dimen181
+\lineht@=\dimen182
+\@envbody=\toks31
+\multlinegap=\skip60
+\multlinetaggap=\skip61
+\mathdisplay@stack=\toks32
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+\linenoamsmath@ams@eqpen=\count303
+
 (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 
@@ -356,52 +426,52 @@ Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen174
-\captionmargin=\dimen175
-\caption@leftmargin=\dimen176
-\caption@rightmargin=\dimen177
-\caption@width=\dimen178
-\caption@indent=\dimen179
-\caption@parindent=\dimen180
-\caption@hangindent=\dimen181
+\caption@tempdima=\dimen183
+\captionmargin=\dimen184
+\caption@leftmargin=\dimen185
+\caption@rightmargin=\dimen186
+\caption@width=\dimen187
+\caption@indent=\dimen188
+\caption@parindent=\dimen189
+\caption@hangindent=\dimen190
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count291
-\c@continuedfloat=\count292
+\c@caption@flags=\count304
+\c@continuedfloat=\count305
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 )
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count293
+\c@subfigure=\count306
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count294
+\c@subtable=\count307
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count295
-\l__pdf_internal_box=\box55
+\l__color_backend_stack_int=\count308
+\l__pdf_internal_box=\box57
 )
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -469,24 +539,24 @@ LaTeX Font Info:    ... okay on input line 105.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 105.
+Package hyperref Info: Link coloring OFF on input line 106.
 (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 105.
-Package microtype Info: Applying patch `item' on input line 105.
-Package microtype Info: Applying patch `toc' on input line 105.
-Package microtype Info: Applying patch `eqnum' on input line 105.
-Package microtype Info: Applying patch `footnote' on input line 105.
-Package microtype Info: Applying patch `verbatim' on input line 105.
+LaTeX Info: Redefining \microtypecontext on input line 106.
+Package microtype Info: Applying patch `item' on input line 106.
+Package microtype Info: Applying patch `toc' on input line 106.
+Package microtype Info: Applying patch `eqnum' on input line 106.
+Package microtype Info: Applying patch `footnote' on input line 106.
+Package microtype Info: Applying patch `verbatim' on input line 106.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 105.
+LaTeX Info: Redefining \showhyphens on input line 106.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -496,17 +566,17 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count296
-\scratchdimen=\dimen182
-\scratchbox=\box56
-\nofMPsegments=\count297
-\nofMParguments=\count298
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count299
-\MPscratchDim=\dimen183
-\MPnumerator=\count300
-\makeMPintoPDFobject=\count301
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count309
+\scratchdimen=\dimen191
+\scratchbox=\box58
+\nofMPsegments=\count310
+\nofMParguments=\count311
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count312
+\MPscratchDim=\dimen192
+\MPnumerator=\count313
+\makeMPintoPDFobject=\count314
+\everyMPtoPDFconversion=\toks34
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -523,7 +593,7 @@ Package caption Info: End \AtBeginDocument code.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 109
+LaTeX Font Info:    Trying to load font information for U+msa on input line 110
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -532,7 +602,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 109
+LaTeX Font Info:    Trying to load font information for U+msb on input line 110
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -542,7 +612,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-09.
+10.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
@@ -552,7 +622,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for T1+phv on input line 11
-7.
+8.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
@@ -568,80 +638,74 @@ Package microtype Info: Loading generic protrusion settings for font family
 st/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-su
 per-t1.enc}]
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-32.
+33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [2] [3]
-Underfull \vbox (badness 1152) has occurred while \output is active []
-
- [4]
-<../figures/SSDC_S51.pdf, id=190, 318.92612pt x 228.00833pt>
+) [2] [3] [4]
+<../figures/SSDC_S51.pdf, id=197, 318.92612pt x 228.00833pt>
 File: ../figures/SSDC_S51.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S51.pdf>
-Package pdftex.def Info: ../figures/SSDC_S51.pdf  used on input line 222.
+Package pdftex.def Info: ../figures/SSDC_S51.pdf  used on input line 223.
 (pdftex.def)             Requested size: 186.81842pt x 133.56001pt.
-<../figures/SSDC_S52.pdf, id=191, 319.01646pt x 228.00833pt>
+<../figures/SSDC_S52.pdf, id=198, 319.01646pt x 228.00833pt>
 File: ../figures/SSDC_S52.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S52.pdf>
-Package pdftex.def Info: ../figures/SSDC_S52.pdf  used on input line 229.
+Package pdftex.def Info: ../figures/SSDC_S52.pdf  used on input line 230.
 (pdftex.def)             Requested size: 186.81842pt x 133.52174pt.
-
-[5 <../figures/SSDC_S51.pdf> <../figures/SSDC_S52.pdf>]
-<../figures/SSDC_S53_IBSO.pdf, id=215, 326.38965pt x 228.00833pt>
+ [5 <../figures/SSDC_S51.pdf> <../figures/SSDC_S52.pdf>]
+<../figures/SSDC_S53_IBSO.pdf, id=222, 326.38965pt x 228.00833pt>
 File: ../figures/SSDC_S53_IBSO.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S53_IBSO.pdf>
-Package pdftex.def Info: ../figures/SSDC_S53_IBSO.pdf  used on input line 268.
+Package pdftex.def Info: ../figures/SSDC_S53_IBSO.pdf  used on input line 269.
 (pdftex.def)             Requested size: 190.79109pt x 133.28516pt.
-<../figures/SSDC_S53_CBSO.pdf, id=216, 324.54774pt x 228.00833pt>
+<../figures/SSDC_S53_CBSO.pdf, id=223, 324.54774pt x 228.00833pt>
 File: ../figures/SSDC_S53_CBSO.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S53_CBSO.pdf>
-Package pdftex.def Info: ../figures/SSDC_S53_CBSO.pdf  used on input line 275.
+Package pdftex.def Info: ../figures/SSDC_S53_CBSO.pdf  used on input line 276.
 (pdftex.def)             Requested size: 190.79109pt x 134.03665pt.
-
-Underfull \vbox (badness 4467) has occurred while \output is active []
-
  [6 <../figures/SSDC_S53_IBSO.pdf> <../figures/SSDC_S53_CBSO.pdf>]
-<../figures/FS_GB_44.pdf, id=239, 245.718pt x 180.675pt>
+<../figures/FS_GB_44.pdf, id=246, 245.718pt x 180.675pt>
 File: ../figures/FS_GB_44.pdf Graphic file (type pdf)
 <use ../figures/FS_GB_44.pdf>
-Package pdftex.def Info: ../figures/FS_GB_44.pdf  used on input line 307.
+Package pdftex.def Info: ../figures/FS_GB_44.pdf  used on input line 308.
 (pdftex.def)             Requested size: 190.79109pt x 140.29459pt.
-<../figures/FS_JPEG_44.pdf, id=240, 245.718pt x 180.675pt>
+<../figures/FS_JPEG_44.pdf, id=247, 245.718pt x 180.675pt>
 File: ../figures/FS_JPEG_44.pdf Graphic file (type pdf)
 <use ../figures/FS_JPEG_44.pdf>
-Package pdftex.def Info: ../figures/FS_JPEG_44.pdf  used on input line 314.
+Package pdftex.def Info: ../figures/FS_JPEG_44.pdf  used on input line 315.
 (pdftex.def)             Requested size: 190.79109pt x 140.29459pt.
- [7 <../figures/FS_GB_44.pdf> <../figures/FS_JPEG_44.pdf>]
-! Undefined control sequence.
-l.356 ...elta \mathrm{SSDC} = \mathrm{SSDC}_{\text
-                                                  {layer }1} - \mathrm{SSDC}...
 
-? 
-! Undefined control sequence.
-l.356 ...}_{\text{layer }1} - \mathrm{SSDC}_{\text
-                                                  {layer }0},
-? 
-[8] [9] (./main.bbl [10])
+Underfull \vbox (badness 7759) has occurred while \output is active []
+
+ [7 <../figures/FS_GB_44.pdf> <../figures/FS_JPEG_44.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8]
+(./main.bbl
+Underfull \vbox (badness 2426) has occurred while \output is active []
+
+ [9]
+[10])
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[11] (./checklist.tex [12] [13] [14] [15] [16] [17]) [18] (./main.aux)
+[11] [12] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: FD6D4FDF5BDBA4E28F1F50C7E1F10792;5335.
+(rerunfilecheck)             Checksum: 885DD57D2B00B7E6FFFB0899774DE759;5773.
  ) 
 Here is how much of TeX's memory you used:
- 14686 strings out of 474222
- 235402 string characters out of 5748732
- 1945975 words of memory out of 5000000
- 36346 multiletter control sequences out of 15000+600000
- 608927 words of font info for 275 fonts, out of 8000000 for 9000
+ 15369 strings out of 474222
+ 244335 string characters out of 5748732
+ 1946975 words of memory out of 5000000
+ 37032 multiletter control sequences out of 15000+600000
+ 613326 words of font info for 280 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,10n,79p,1179b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,10n,79p,1167b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
@@ -656,10 +720,10 @@ usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on main.pdf (18 pages, 320431 bytes).
+Output written on main.pdf (12 pages, 296011 bytes).
 PDF statistics:
- 454 PDF objects out of 1000 (max. 8388607)
- 374 compressed objects within 4 object streams
- 84 named destinations out of 1000 (max. 500000)
- 50895 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 405 PDF objects out of 1000 (max. 8388607)
+ 331 compressed objects within 4 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 57047 words of extra memory for PDF output out of 61914 (max. 10000000)
 
