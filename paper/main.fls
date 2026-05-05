@@ -292,6 +292,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT ./main.bbl
 INPUT ./main.bbl
 INPUT main.bbl
+INPUT ./checklist.tex
+INPUT ./checklist.tex
+INPUT checklist.tex
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out

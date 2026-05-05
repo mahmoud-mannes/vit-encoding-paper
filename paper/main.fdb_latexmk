@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1778001738.44037 -1
+["bibtex main"] 1778015299.41285 "main.aux" "main.bbl" "main" 1778015306.54426 0
   "./references.bib" 1778000869.43095 7627 8002d1a6397edfc49b6b84517f3b3d26 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1778001736.6258 16211 519262e32dbd89141cdbfa5c5f218830 "pdflatex"
+  "main.aux" 1778015304.9707 16245 66a7a3ca5093f7d240b4f6950a89319b "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1778001732.16125 "main.tex" "main.pdf" "main" 1778001738.44142 0
+["pdflatex"] 1778015299.8368 "main.tex" "main.pdf" "main" 1778015306.54535 0
   "../figures/FS_GB_44.pdf" 1777574804.35977 11751 5a5c0817099b4cde904ec94cfb7c836c ""
   "../figures/FS_JPEG_44.pdf" 1777574906.69571 11438 a26aaa18d36e16960f4c5c10f728338c ""
   "../figures/SSDC_S51.pdf" 1776367888.19056 10593 441f2af8677ef3f5a5cfcb0bbec66aa5 ""
@@ -148,10 +148,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1766784150.00538 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1766784259 8214823 cc0482d0202066a11aab1bbfedc49937 ""
-  "main.aux" 1778001736.6258 16211 519262e32dbd89141cdbfa5c5f218830 "pdflatex"
-  "main.bbl" 1778000874.82896 8245 ef494ca2e641ab57f7cc2077729c6a65 "bibtex main"
-  "main.out" 1778001736.6308 5773 885dd57d2b00b7e6fffb0899774de759 "pdflatex"
-  "main.tex" 1778001729.29266 46685 65b91356f52cb0a64d25a882ce832900 ""
+  "checklist.tex" 1777999225.71895 25694 60de519ad169dcb03cc11dc26c9f0765 ""
+  "main.aux" 1778015304.9707 16245 66a7a3ca5093f7d240b4f6950a89319b "pdflatex"
+  "main.bbl" 1778015299.80466 8245 ef494ca2e641ab57f7cc2077729c6a65 "bibtex main"
+  "main.out" 1778015304.9837 5872 02678c6ab18e89db5cc63bb6d52f1b17 "pdflatex"
+  "main.tex" 1778015289.93554 46388 1c01afcba64380e7dd8450e5c13e58dd ""
   "neurips_2026.sty" 1773806160 13462 818d80447f57703e59b8270885421e82 ""
   (generated)
   "main.aux"

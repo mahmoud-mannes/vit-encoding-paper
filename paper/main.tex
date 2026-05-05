@@ -254,7 +254,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
     \textbf{Results:}
     Figure~\ref{fig:SSDC2} compares the layer-wise evolution of SSDC for an untrained ablated model, a trained ablated model, and a trained model with positional embeddings. The untrained ablated model exhibits relatively high SSDC (approximately 0.57–0.64) with only weak growth across depth, reflecting static spatial correlations induced by architectural and data priors rather than learning.
 
-    In contrast, the trained ablated model shows a qualitatively different trajectory: starting from lower SSDC, it exhibits a sharp increase in early layers followed by continued growth. This dynamic pattern closely resembles that of the trained model with positional embeddings. The key distinction is not absolute SSDC magnitude, but its evolution—static in the untrained model, structured and rapidly changing after training.
+    In contrast, the trained ablated model shows a qualitatively different trajectory: starting from lower SSDC, it exhibits a sharp increase in early layers followed by continued growth. This dynamic pattern closely resembles that of the trained model with positional embeddings. The key distinction is not absolute SSDC magnitude, but its evolution.
 
     These results indicate that non-trivial spatial structure emerges during training even without positional embeddings. This is consistent with the non-trivial performance of ablated models and prior evidence that transformers can implicitly recover positional information.
 
@@ -267,7 +267,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
       \begin{subfigure}[t]{0.48\textwidth}
           \centering
           \includegraphics[width=\textwidth]{../figures/SSDC_S53_IBSO.pdf}
-          \caption{\textbf{Models with positional encodings.} APE, Sinusoidal PEs, and RoPE models exhibit substantial SSDC recovery under RPI, indicating spatial organization anchored to token indices. RoPE shows a gradual accumulation of structure across depth, while APE and Sinusoidal PEs exhibit earlier, injection-like peaks.}
+          \caption{\textbf{Models with positional encodings.} APE, Sinusoidal PEs, and RoPE models exhibit substantial SSDC recovery under RPI, indicating spatial organization anchored to token indices. RoPE shows a gradual accumulation of structure across depth, while APE and Sinusoidal PEs exhibit earlier peaks.}
           \label{fig:ssdc_rpi_pe}
       \end{subfigure}
       \hfill
@@ -329,7 +329,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
 
     For each model, we compute the \emph{Fragility Score} (FS), defined as the relative drop in accuracy under each transformation.
 
-    We include \textbf{Random Permutation Training (RPT)} as a critical control. RPT preserves the presence of positional embeddings but prevents the formation of a stable index-based spatial organization, allowing us to distinguish between the mere presence of positional signals and the emergence of a consistent positional reference frame.
+    We include \textbf{Random Permutation Training (RPT)} as a critical control, allowing us to distinguish between the mere presence of positional signals and the emergence of a consistent positional reference frame.
 
     We emphasize that these robustness results are limited to content-disrupting perturbations (e.g., compression artifacts and blur) and do not necessarily generalize to other forms of distribution shift such as geometric transformations or semantic shifts.
     
@@ -349,9 +349,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
     \textbf{Experimental Setup:}
     To probe the relationship between spatial organization and robustness, we require a controlled intervention that selectively disrupts index-based spatial structure while preserving the rest of the model. We achieve this by scaling the magnitude of learned absolute positional embeddings (APE) at inference time by a factor $\alpha \in [0,1]$, without retraining.
 
-    While this intervention operates on positional embeddings, our goal is not to study positional signal strength per se, but to use it as a mechanism to continuously degrade the model’s \emph{index-based spatial organization}. To measure the integrity of this organization, we evaluate Spatial Similarity Distance Correlation (SSDC) under Random Permutation at Inference (RPI), as introduced in Section~5.3. Under RPI, any recovered spatial structure must be anchored to token indices rather than content. We therefore interpret SSDC recovery as a proxy for the presence of index-based spatial organization.
-
-    Importantly, SSDC recovery approaching zero does not imply that the model is actively constructing a content-based spatial structure; rather, it indicates that index-based spatial organization is no longer preserved under permutation.
+    While this intervention operates on positional embeddings, our goal is not to study positional signal strength per se, but to use it as a mechanism to continuously degrade the model’s \emph{index-based spatial organization}. To measure the integrity of this organization, we evaluate Spatial Similarity Distance Correlation (SSDC) under Random Permutation at Inference (RPI), as introduced in Section~5.3. Under RPI, any recovered spatial structure must be anchored to token indices rather than content. We therefore interpret SSDC recovery as a proxy for the presence of index-based spatial organization. Importantly, SSDC recovery approaching zero does not imply content-based spatial structure; it indicates that the positional signal is too weak to sustain index-based organization.
 
     To summarize this behavior compactly, we define:
     \[
@@ -378,7 +376,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
     \end{tabular}
     \caption{
     Effect of positional embedding magnitude $\alpha$ on index-based spatial organization and robustness.
-    $\Delta$SSDC (measured under RPI) captures the recovery of index-based spatial structure after the first encoder block.
+    $\Delta$SSDC captures the recovery of index-based spatial structure after the first encoder block.
     As $\alpha$ decreases, $\Delta$SSDC collapses, indicating the breakdown of index-based spatial organization, while fragility increases sharply in the same regime before plateauing once spatial structure is lost.
     }
     \label{tab:pe_scaling}
@@ -398,9 +396,9 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
     Overall, these results provide evidence that robustness may be driven in part by the presence of index-based spatial organization. Positional scaling serves only as a means of intervention; the observed changes in robustness track the degradation of spatial structure rather than the magnitude of the positional signal itself.
 
 
-%\section{Limitations}
+\section{Limitations}
 
-%The findings reported here are based on ViT-S models trained from scratch on ImageNet-100, and it remains an open question whether the observed relationships between positional encoding, index-based spatial organization, and robustness generalize to larger architectures, pre-trained models, or models fine-tuned from large-scale checkpoints. The robustness evaluation is specifically scoped to content-disrupting perturbations (JPEG compression and Gaussian blur); we make no claims about spatial perturbations, adversarial shifts, or semantic distribution changes, and these may involve different mechanisms. SSDC is used as a coarse proxy for spatial organization rather than a direct measurement of a specific representational mechanism, and its interpretation depends on the comparative and intervention-based framing established in Section 5.1. Finally, the positional scaling experiment (Section 5.5) conflates spatial organization degradation with changes in raw positional signal magnitude, and while the three-regime structure is consistent with a mediating role for index-based organization, alternative pathways cannot be fully excluded.
+The findings reported here are based on ViT-S models trained from scratch on ImageNet-100, and it remains an open question whether the observed relationships between positional encoding, index-based spatial organization, and robustness generalize to larger architectures, pre-trained models, or models fine-tuned from large-scale checkpoints. The robustness evaluation is specifically scoped to content-disrupting perturbations (JPEG compression and Gaussian blur); we make no claims about spatial perturbations, adversarial shifts, or semantic distribution changes, and these may involve different mechanisms. SSDC is used as a coarse proxy for spatial organization rather than a direct measurement of a specific representational mechanism, and its interpretation depends on the comparative and intervention-based framing established in Section 5.1. Finally, the positional scaling experiment (Section 5.5) conflates spatial organization degradation with changes in raw positional signal magnitude, and while the three-regime structure is consistent with a mediating role for index-based organization, alternative pathways cannot be fully excluded.
 
 \section{Conclusion}
 
@@ -411,12 +409,12 @@ We studied how positional encodings shape spatial organization in Vision Transfo
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
 \appendix
 
 \section{Experimental Setup and Hyperparameters}
 
-  \begin{table}[h]
+  \begin{table}[H]
     \centering
     \caption{Model architecture and training hyperparameters used in all experiments.}
     \label{tab:hyperparams}
@@ -457,7 +455,7 @@ We studied how positional encodings shape spatial organization in Vision Transfo
 
 \section{Additional Positional Encoding Scaling Results}
   \subsection{Full Learnable APE Scaling Results}
-    \begin{table}[h]
+    \begin{table}[H]
       \centering
       \small
       \begin{tabular}{c|cc|cc}
@@ -488,7 +486,7 @@ We studied how positional encodings shape spatial organization in Vision Transfo
     These results exhibit a clear three-regime structure. For large values of $\alpha$, $\Delta$SSDC remains high and fragility is relatively low, indicating stable index-aligned spatial organization. As $\alpha$ decreases past a critical range (around $\alpha \approx 0.5$–$0.6$), $\Delta$SSDC collapses sharply to zero, coinciding with a rapid increase in fragility. Below this threshold, fragility plateaus despite further reductions in $\alpha$, suggesting that once index-aligned spatial structure is lost, additional degradation of positional signal has limited further impact on robustness.
 
   \subsection{Sinusoidal Positional Encoding Scaling Results}
-    \begin{table}[h]
+    \begin{table}[H]
       \centering
       \small
       \begin{tabular}{c|c|c}
@@ -519,8 +517,8 @@ We studied how positional encodings shape spatial organization in Vision Transfo
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\newpage
-%\input{checklist.tex}
+\newpage
+\input{checklist.tex}
 
 
 \end{document}
