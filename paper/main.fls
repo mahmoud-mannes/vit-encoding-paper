@@ -292,6 +292,16 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT ./main.bbl
 INPUT ./main.bbl
 INPUT main.bbl
+INPUT ../figures/SSDC_APP_FULL.pdf
+INPUT ../figures/SSDC_APP_FULL.pdf
+INPUT ../figures/SSDC_APP_FULL.pdf
+INPUT ../figures/SSDC_APP_FULL.pdf
+INPUT ../figures/SSDC_APP_FULL.pdf
+INPUT ../figures/SSDC_APP_RPT.pdf
+INPUT ../figures/SSDC_APP_RPT.pdf
+INPUT ../figures/SSDC_APP_RPT.pdf
+INPUT ../figures/SSDC_APP_RPT.pdf
+INPUT ../figures/SSDC_APP_RPT.pdf
 INPUT ./checklist.tex
 INPUT ./checklist.tex
 INPUT checklist.tex

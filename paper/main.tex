@@ -293,7 +293,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
 
     In contrast, all models trained with positional embeddings show substantial SSDC recovery under RPI, indicating representations that are more consistent with index-anchored spatial organization. However, the nature of this recovery differs across encoding schemes. For APE and sinusoidal embeddings, SSDC exhibits a rapid increase in early layers following permutation, reaching a peak within the first few layers before stabilizing or slightly decreasing. This behavior suggests that spatial structure is injected early in the network via additive positional signals.
 
-    RoPE models display a qualitatively different trajectory: SSDC increases more gradually and continues to grow with depth, without a pronounced early-layer peak. This indicates that positional information is integrated progressively throughout the network, consistent with its multiplicative incorporation into attention mechanisms.
+    RoPE models display a qualitatively different trajectory: SSDC increases more gradually and continues to grow with depth, without a pronounced early-layer peak. This indicates that positional information is integrated progressively throughout the network, consistent with its multiplicative incorporation into attention mechanisms. A similar depth-wise pattern is observed in the unpermuted setting (Appendix~C.1).
 
     RPT models, despite having positional embeddings present, fail to exhibit meaningful SSDC recovery under RPI, behaving similarly to fully ablated models. This suggests that the mere presence of positional embeddings is insufficient; a consistent mapping between token indices and spatial locations during training appears necessary for index-based spatial organization to emerge.
 
@@ -327,7 +327,7 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
 
     \textbf{Gaussian Blur:} We apply Gaussian blur with standard deviation $\sigma = 2.5$, attenuating high-frequency detail while preserving low-frequency structure. This constitutes a milder perturbation than JPEG.
 
-    For each model, we compute the \emph{Fragility Score} (FS), defined as the relative drop in accuracy under each transformation.
+    For each model, we compute the \emph{Fragility Score} (FS), defined as the relative drop in accuracy under each transformation. We also report the raw accuracy of each model condition in Appendix D.
 
     We include \textbf{Random Permutation Training (RPT)} as a critical control, allowing us to distinguish between the mere presence of positional signals and the emergence of a consistent positional reference frame.
 
@@ -508,12 +508,132 @@ We studied how positional encodings shape spatial organization in Vision Transfo
       \caption{
       Effect of sinusoidal positional embedding magnitude $\alpha$ on index-based spatial organization and robustness (single-seed experiment).
       $\Delta$SSDC (measured under RPI) captures the recovery of index-based spatial structure after the first encoder block.
-      We report no standard deviations because results are obtained from a single seed; this experiment is intended as a qualitative confirmation rather than a statistically rigorous estimate. Specifically, it verifies that the same qualitative relationship observed with absolute positional embeddings—namely, the collapse of $\Delta$SSDC and the increase in fragility as $\alpha$ decreases—also holds for sinusoidal positional encodings.
+      We report no standard deviations because results are obtained from a single seed; this experiment is intended as a qualitative confirmation rather than a statistically rigorous estimate. Specifically, it verifies that the same qualitative relationship observed with absolute positional embeddings (namely, the collapse of $\Delta$SSDC and the increase in fragility as $\alpha$ decreases) also holds for sinusoidal positional encodings.
       }
       \label{tab:sinupe_scaling_single_seed}
     \end{table}
 
     A similar overall relationship is observed for sinusoidal positional encodings, with decreasing $\alpha$ leading to reduced $\Delta$SSDC and increased fragility. However, in contrast to learnable APE, the transition is more gradual: $\Delta$SSDC degrades smoothly across the full range of $\alpha$ without a sharp collapse threshold, and fragility increases correspondingly in a continuous manner. This suggests that while the coupling between spatial structure and robustness persists across encoding types, the dynamics of how spatial organization degrades are encoding-dependent.
+
+
+\section{Additional Representational Analyses}
+  \subsection{Depth-wise Evolution of Spatial Structure Across Encoding Schemes}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.6\linewidth]{../figures/SSDC_APP_FULL.pdf}
+      \caption{Layer-wise evolution of SSDC across model conditions in the unpermuted setting,
+      averaged over 4 random seeds. Shaded regions indicate $\pm 1$ standard deviation.
+      Distinct depth-wise trajectories emerge: APE and sinusoidal (SPE) models exhibit an
+      early injection-like peak followed by gradual decay, while RoPE and ablated models
+      show a more gradual, monotonic increase across depth.}
+      \label{fig:ssdc_depthwise_full}
+    \end{figure}
+
+    Figure~\ref{fig:ssdc_depthwise_full} shows the layer-wise evolution of SSDC across model
+    conditions in the unpermuted setting. While all trained models develop non-trivial spatial
+    structure, their depth-wise trajectories differ qualitatively.
+
+    APE and sinusoidal (SPE) models exhibit an \emph{injection-like} pattern: SSDC rises sharply
+    in the first few layers (typically peaking around layers 1--2), followed by a gradual decay
+    or stabilization at deeper layers. This behavior is consistent with positional information
+    being introduced additively at the input and propagated through the network, leading to a
+    strong early-layer imprint that weakens with depth.
+
+    In contrast, RoPE models display a more gradual increase in SSDC across depth, without a
+    pronounced early peak. This aligns with the behavior observed under RPI in Section~5.3,
+    and is consistent with positional information being incorporated multiplicatively within
+    attention, allowing spatial structure to accumulate progressively across layers.
+
+    A similar gradual trajectory is observed in ablated models. In the absence of positional
+    signals, spatial structure must be inferred from patch content, making it intuitive that
+    such structure is constructed incrementally over depth rather than injected early.
+
+    These results highlight that while all models develop spatial structure, the \emph{mechanism}
+    by which this structure emerges differs substantially across encoding schemes. Importantly,
+    because SSDC in the unpermuted setting reflects both content-based and index-based effects,
+    these trajectories alone do not distinguish the underlying spatial organization strategy;
+    the RPI-based analysis in Section~5.3 is required for that separation.
+
+  \subsection{Spatial Structure in Random Permutation Training (RPT)}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.6\linewidth]{../figures/SSDC_APP_RPT.pdf}
+      \caption{Layer-wise evolution of SSDC in RPT models. Without permutation at inference,
+      SSDC increases gradually with depth, resembling the trajectory observed in ablated models.
+      Under RPI, SSDC collapses to zero across all layers, indicating the absence of index-based
+      spatial organization despite the presence of positional embeddings during training.}
+      \label{fig:ssdc_rpt}
+    \end{figure}
+
+    Figure~\ref{fig:ssdc_rpt} shows the layer-wise evolution of SSDC for models trained under
+    Random Permutation Training (RPT). We evaluate SSDC both in the standard (unpermuted)
+    setting and under Random Permutation at Inference (RPI).
+
+    In the absence of permutation at inference, RPT models exhibit a gradual increase in SSDC
+    across depth, closely resembling the behavior observed in fully ablated models. This
+    indicates that non-trivial spatial correlations can still emerge during training even when
+    the mapping between token indices and spatial locations is randomized at every step.
+
+    However, under RPI, SSDC collapses to approximately zero across all layers. This mirrors
+    the behavior of ablated models and contrasts sharply with models trained with consistent
+    positional embeddings, which retain substantial SSDC under permutation (Section~5.3).
+    The absence of SSDC recovery indicates that RPT models do not develop an index-based
+    spatial organization, despite the architectural presence of positional embeddings.
+
+    Taken together, these results suggest that a stable mapping between token indices and
+    spatial locations during training is necessary for index-based spatial organization to
+    emerge. When this mapping is disrupted, as in RPT, spatial correlations that arise during
+    training do not persist under permutation, and are therefore not anchored to token indices.
+
+    We emphasize that while RPT models exhibit non-trivial SSDC in the unpermuted setting,
+    this alone does not imply the presence of a well-formed spatial representation. Rather,
+    it suggests that spatial correlations can arise from content statistics even in the absence
+    of a consistent positional reference frame, consistent with the behavior observed in
+    ablated models.
+
+\section{Raw Accuracy and Fragility Metrics}
+  \textbf{Overview.}
+  We report raw top-1 accuracy on the clean ImageNet-100 validation set (\emph{normal\_acc}) and Fragility Scores (FS) under JPEG compression and Gaussian blur for all model conditions. All values are averaged over 4 random seeds with standard deviations.
+
+  \begin{table}[H]
+  \centering
+  \small
+  \begin{tabular}{l|cc|cc|cc}
+  \toprule
+  & \multicolumn{2}{c|}{\textbf{Normal Accuracy}} 
+  & \multicolumn{2}{c|}{\textbf{JPEG FS}} 
+  & \multicolumn{2}{c}{\textbf{Gaussian Blur FS}} \\
+  \textbf{Model} & Mean & Std & Mean & Std & Mean & Std \\
+  \midrule
+  APE  & 0.6406 & 0.0018 & 0.4347 & 0.0132 & 0.1842 & 0.0141 \\
+  SPE  & 0.6568 & 0.0069 & 0.4351 & 0.0086 & 0.2082 & 0.0054 \\
+  RoPE & 0.6901 & 0.0042 & 0.2988 & 0.0065 & 0.1474 & 0.0131 \\
+  Ablated & 0.5682 & 0.0056 & 0.6458 & 0.0119 & 0.2984 & 0.0085 \\
+  RPT & 0.5595 & 0.0054 & 0.6297 & 0.0038 & 0.2427 & 0.0123 \\
+  \bottomrule
+  \end{tabular}
+  \caption{
+  Raw performance and fragility metrics across model conditions. Fragility Score (FS) is defined as the relative drop in accuracy under distribution shift. Higher values indicate greater sensitivity.
+  }
+  \label{tab:raw_metrics}
+  \end{table}
+
+  \textbf{Key Observations:}
+  Across all conditions, models with positional encodings achieve higher clean accuracy than ablated and RPT models, with RoPE performing best overall. However, differences in clean accuracy (e.g., $\sim$69\% for RoPE vs.\ $\sim$64--66\% for APE/SPE) are modest compared to the much larger gaps observed in fragility.
+
+  Under JPEG compression, a strong content-disrupting perturbation, models with positional encodings exhibit substantially lower fragility (APE/SPE $\sim$0.43, RoPE $\sim$0.30) than ablated and RPT models ($\sim$0.63--0.65). This large separation mirrors the presence or absence of index-based spatial organization identified in the main text.
+
+  Under Gaussian blur, a milder perturbation, the same ordering is preserved but differences are compressed. RoPE remains the most robust, followed by APE/SPE, with RPT and ablated models exhibiting higher fragility. Notably, RPT consistently lies between PE-based and ablated models, suggesting that while it fails to develop a stable index-based spatial organization, it may still benefit from the presence of positional signals in a limited or indirect way.
+
+  \textbf{Interpretation:}
+  These results reinforce the central claim that robustness is primarily associated with the presence of a stable positional reference frame rather than raw accuracy. While positional encodings improve both accuracy and robustness, the magnitude of robustness differences far exceeds what would be expected from accuracy differences alone.
+
+  At the same time, the non-identical behavior of RPT and ablated models (particularly under Gaussian blur) indicates that robustness cannot be explained solely by a binary distinction between index-based and non-index-based organization. Instead, these results suggest that positional signals may influence robustness through additional mechanisms (e.g., inductive biases on representation learning), even when they do not give rise to a stable index-based spatial structure.
+
+  Overall, the raw metrics are consistent with, but do not by themselves establish, the mechanistic link proposed in the main text. This motivates the use of SSDC and permutation-based interventions to more directly probe the structure of representations.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
