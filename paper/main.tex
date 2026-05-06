@@ -126,7 +126,7 @@ Prior work shows that ViTs retain substantial performance even when positional i
 
 Existing studies have largely addressed this question through downstream performance comparisons or architectural variations. While informative, these approaches provide limited insight into how positional information shapes internal representations. In particular, it remains unclear whether different positional encoding schemes (learned absolute, sinusoidal, or rotary) induce distinct spatial reasoning strategies, or whether their effects on robustness arise from a shared mechanism.
 
-In this work, we adopt a geometric perspective. We analyze the evolution of token representations across the transformer stack using tools from representational geometry \citep{raghu2021do}, introducing the Spatial Similarity Distance Correlation (SSDC) as a probe of spatial structure. Critically, we use SSDC in conjunction with a random permutation intervention at inference to distinguish whether spatial organization is anchored to token indices or driven by patch content. We compare models trained with learned absolute positional embeddings (APE), sinusoidal encodings, rotary embeddings (RoPE), and no positional embeddings, and evaluate their robustness to distributional shifts.
+In this work, we adopt a geometric perspective. We analyze the evolution of token representations across the transformer stack using tools from representational geometry \citep{raghu2021do}, introducing the Spatial Similarity Distance Correlation (SSDC) as a probe of spatial structure. Critically, we use SSDC in conjunction with a random permutation intervention at inference to distinguish whether spatial organization is anchored to token indices or driven by patch content. We compare models trained with learned absolute positional embeddings (APE), sinusoidal encodings (SPE), rotary embeddings (RoPE), and no positional embeddings, and evaluate their robustness to distributional shifts.
 
 Our central finding is that the specific encoding mechanism matters less than the presence of a consistent positional signal. We show that:
 \begin{itemize}
@@ -190,7 +190,7 @@ In practice, models may exhibit both behaviors; the key distinction is which sig
 At selected layers, we extract the residual stream as a matrix $R \in \mathbb{R}^{T \times C}$, where $T$ is the number of tokens and $C$ the embedding dimension. We compute pairwise cosine similarities between unit-normalized token representations to form a symmetric similarity matrix, averaged across the batch dimension.
 
 \subsection{Spatial Similarity Distance Correlation}
-Let $S \in \mathbb{R}^{T \times T}$ denote the token similarity matrix, and let $p_i \in \mathbb{Z}^2$ denote the spatial coordinates of token $i$. Define the spatial distance matrix $D$ by $D_{ij} = \|p_i - p_j\|_1$. We define SSDC as the Spearman rank correlation between similarity and negative spatial distance over all token pairs:
+Let $S \in \mathbb{R}^{T \times T}$ denote the token similarity matrix, and let $p_i \in \mathbb{N}^2$ denote the spatial coordinates of token $i$. Define the spatial distance matrix $D$ by $D_{ij} = \|p_i - p_j\|_1$. We define SSDC as the Spearman rank correlation between similarity and negative spatial distance over all token pairs:
 \[
 \mathrm{SSDC} = \rho_{\mathrm{Spearman}}\left(\{S_{ij}\}_{i < j},\ \{-D_{ij}\}_{i < j}\right).
 \]
@@ -331,15 +331,14 @@ where $A_{\mathrm{normal}}$ and $A_{\mathrm{shift}}$ denote accuracy on clean an
 
     We include \textbf{Random Permutation Training (RPT)} as a critical control, allowing us to distinguish between the mere presence of positional signals and the emergence of a consistent positional reference frame.
 
-    We emphasize that these robustness results are limited to content-disrupting perturbations (e.g., compression artifacts and blur) and do not necessarily generalize to other forms of distribution shift such as geometric transformations or semantic shifts.
+    We emphasize that these robustness results are limited to content-disrupting perturbations (e.g., compression artifacts and blur) and do not necessarily generalize to other forms of distribution shift.
     
     \textbf{Results:}
-    Under JPEG compression, models with positional encodings exhibit substantially lower fragility (APE and sinusoidal: $\sim$0.43, RoPE: $\sim$0.30) than ablated and RPT models ($\sim$0.66). This large gap indicates that robustness to severe content degradation is strongly influenced by the presence of a stable positional reference frame. Within PE-based models, RoPE consistently achieves lower fragility, suggesting a secondary effect of the encoding mechanism.
+    Under JPEG compression, models with positional encodings exhibit substantially lower fragility (APE and sinusoidal: $\sim$0.43, RoPE: $\sim$0.30) than ablated and RPT models ($\sim$0.66). This large gap indicates that robustness to severe content degradation is strongly influenced by the presence of a stable positional reference frame. Within PE-based models, RoPE consistently achieves lower fragility, suggesting a secondary effect of the encoding mechanism. We speculate that RoPE's progressive depth-wise accumulation of spatial structure may keep later layers more spatially grounded than the early-layer injection characteristic of additive encodings.
 
     Under Gaussian blur, the same ordering is preserved but differences are attenuated (RoPE: $\sim$0.15, APE: $\sim$0.17--0.20, sinusoidal: $\sim$0.22, RPT: $\sim$0.25, ablated: $\sim$0.30). Because blur preserves global structure, it provides a weaker test of reliance on content-based cues, reducing the separation between models.
 
     Taken together, these results support a two-level interpretation: (1) the emergence of a stable positional reference frame appears to be a dominant factor associated with robustness, and (2) the specific encoding mechanism introduces secondary variation, with RoPE exhibiting consistently lower fragility.
-
     Crucially, the poor robustness of RPT models shows that the mere presence of positional embeddings is insufficient: robustness appears to rely on learning a consistent mapping between token indices and spatial locations. This provides evidence for a relationship between the spatial organization patterns identified earlier and downstream robustness.
 
   \subsection{Linking Index-Based Spatial Organization to Robustness via Positional Scaling}

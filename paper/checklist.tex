@@ -96,7 +96,7 @@
 \item {\bf Experiment statistical significance}
     \item[] Question: Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?
     \item[] Answer: \answerYes{} % Replace by \answerYes{}, \answerNo{}, or \answerNA{}.
-    \item[] Justification: For every result in the paper, we report the mean across 4 random seeds and include error bars in every figure and table.
+    \item[] Justification: For every result in the paper, we report the mean across 4 random seeds and include error bars in every figure and table. The sinusoidal PE scaling experiment (Appendix B.2) is an exception, reported from a single seed as a qualitative confirmation; this is noted explicitly in the table caption.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -113,7 +113,7 @@
 \item {\bf Experiments compute resources}
     \item[] Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
     \item[] Answer: \answerNo{} % Replace by \answerYes{}, \answerNo{}, or \answerNA{}.
-    \item[] Justification: Detailed compute resource information is not reported in this submission. Experiments were conducted on TPU hardware. We note that the experimental scale (ViT-S, ImageNet-100) is modest and reproducible on commonly available academic compute; full training and hyperparameter details are provided in Appendix A.
+    \item[] Justification: Detailed compute resource information is not reported in this submission. Experiments were conducted on TPU v5-1 hardware (each seed trained for approximately 6-8 hours). We note that the experimental scale (ViT-S, ImageNet-100) is modest and reproducible on commonly available academic compute; full training and hyperparameter details are provided in Appendix A.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.

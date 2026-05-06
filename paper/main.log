@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.26)  6 MAY 2026 13:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.26)  6 MAY 2026 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -643,53 +643,53 @@ LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [2] [3] [4]
-<../figures/SSDC_S51.pdf, id=217, 318.92612pt x 228.00833pt>
+<../figures/SSDC_S51.pdf, id=215, 318.92612pt x 228.00833pt>
 File: ../figures/SSDC_S51.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S51.pdf>
 Package pdftex.def Info: ../figures/SSDC_S51.pdf  used on input line 223.
 (pdftex.def)             Requested size: 186.81842pt x 133.56001pt.
-<../figures/SSDC_S52.pdf, id=218, 319.01646pt x 228.00833pt>
+<../figures/SSDC_S52.pdf, id=216, 319.01646pt x 228.00833pt>
 File: ../figures/SSDC_S52.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S52.pdf>
 Package pdftex.def Info: ../figures/SSDC_S52.pdf  used on input line 230.
 (pdftex.def)             Requested size: 186.81842pt x 133.52174pt.
  [5 <../figures/SSDC_S51.pdf> <../figures/SSDC_S52.pdf>]
-<../figures/SSDC_S53_IBSO.pdf, id=242, 326.38965pt x 228.00833pt>
+<../figures/SSDC_S53_IBSO.pdf, id=240, 326.38965pt x 228.00833pt>
 File: ../figures/SSDC_S53_IBSO.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S53_IBSO.pdf>
 Package pdftex.def Info: ../figures/SSDC_S53_IBSO.pdf  used on input line 269.
 (pdftex.def)             Requested size: 190.79109pt x 133.28516pt.
-<../figures/SSDC_S53_CBSO.pdf, id=243, 324.54774pt x 228.00833pt>
+<../figures/SSDC_S53_CBSO.pdf, id=241, 324.54774pt x 228.00833pt>
 File: ../figures/SSDC_S53_CBSO.pdf Graphic file (type pdf)
 <use ../figures/SSDC_S53_CBSO.pdf>
 Package pdftex.def Info: ../figures/SSDC_S53_CBSO.pdf  used on input line 276.
 (pdftex.def)             Requested size: 190.79109pt x 134.03665pt.
  [6 <../figures/SSDC_S53_IBSO.pdf> <../figures/SSDC_S53_CBSO.pdf>]
-<../figures/FS_GB_44.pdf, id=266, 245.718pt x 180.675pt>
+<../figures/FS_GB_44.pdf, id=264, 245.718pt x 180.675pt>
 File: ../figures/FS_GB_44.pdf Graphic file (type pdf)
 <use ../figures/FS_GB_44.pdf>
 Package pdftex.def Info: ../figures/FS_GB_44.pdf  used on input line 308.
 (pdftex.def)             Requested size: 190.79109pt x 140.29459pt.
-<../figures/FS_JPEG_44.pdf, id=267, 245.718pt x 180.675pt>
+<../figures/FS_JPEG_44.pdf, id=265, 245.718pt x 180.675pt>
 File: ../figures/FS_JPEG_44.pdf Graphic file (type pdf)
 <use ../figures/FS_JPEG_44.pdf>
 Package pdftex.def Info: ../figures/FS_JPEG_44.pdf  used on input line 315.
 (pdftex.def)             Requested size: 190.79109pt x 140.29459pt.
  [7 <../figures/FS_GB_44.pdf> <../figures/FS_JPEG_44.pdf>] [8] (./main.bbl [9] 
 [10]) [11] [12]
-<../figures/SSDC_APP_FULL.pdf, id=342, 319.01646pt x 228.00833pt>
+<../figures/SSDC_APP_FULL.pdf, id=340, 319.01646pt x 228.00833pt>
 File: ../figures/SSDC_APP_FULL.pdf Graphic file (type pdf)
 <use ../figures/SSDC_APP_FULL.pdf>
-Package pdftex.def Info: ../figures/SSDC_APP_FULL.pdf  used on input line 524.
+Package pdftex.def Info: ../figures/SSDC_APP_FULL.pdf  used on input line 523.
 (pdftex.def)             Requested size: 238.49341pt x 170.4561pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13]
-<../figures/SSDC_APP_RPT.pdf, id=350, 326.38965pt x 228.00833pt>
+<../figures/SSDC_APP_RPT.pdf, id=348, 326.38965pt x 228.00833pt>
 File: ../figures/SSDC_APP_RPT.pdf Graphic file (type pdf)
 <use ../figures/SSDC_APP_RPT.pdf>
-Package pdftex.def Info: ../figures/SSDC_APP_RPT.pdf  used on input line 562.
+Package pdftex.def Info: ../figures/SSDC_APP_RPT.pdf  used on input line 561.
 (pdftex.def)             Requested size: 238.49341pt x 166.61168pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -714,7 +714,7 @@ Here is how much of TeX's memory you used:
  37060 multiletter control sequences out of 15000+600000
  613776 words of font info for 284 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,10n,79p,1179b,763s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,10n,79p,1179b,737s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
@@ -729,10 +729,10 @@ usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on main.pdf (23 pages, 353282 bytes).
+Output written on main.pdf (23 pages, 353886 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
- 437 compressed objects within 5 object streams
+ 529 PDF objects out of 1000 (max. 8388607)
+ 435 compressed objects within 5 object streams
  101 named destinations out of 1000 (max. 500000)
  57097 words of extra memory for PDF output out of 61914 (max. 10000000)
 
