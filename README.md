@@ -59,7 +59,7 @@ vit-encoding-paper/
 
 ## Pretrained Models
 
-Trained checkpoints for all five PE variants (APE, SinuPE, RoPE, Ablated, RPT) are available via Google Drive:
+Trained checkpoints for all five conditoins (APE, Sinusoidal PEs, RoPE, Ablated, RPT) are available via Google Drive:
 
 **[[Download Pretrained Models]](https://drive.google.com/drive/folders/1L3yuTNPnaxNyNfqxRMPMk2xVnJNHCHgc?usp=drive_link)**
 
@@ -105,6 +105,8 @@ Download the pretrained models from the link above and place them in the `models
 
 Each notebook is self-contained with markdown explanation of the methodology at each step.
 
+**Note on compute:** each notebook loads one model condition and one seed at a time. Running multiple conditions in a single session will exceed available memory on most hardware. We recommend running each condition in a fresh session.
+
 ---
 
 ## Citation
@@ -123,7 +125,7 @@ If you find this work useful, please cite:
 
 ## Notes on Scope and Limitations
 
-This work studies a single model scale (ViT-S) and a single dataset (ImageNet-100). SSDC is a proxy metric for spatial organization and does not directly measure all aspects of representational geometry. Causal claims are made cautiously throughout: the experimental evidence strongly implicates reference frame stability as a driver of robustness, but the full mechanistic picture remains open. We discuss limitations and directions for future work in §5 of the paper.
+This work studies a single model scale (ViT-S) and a single dataset (ImageNet-100) with limited robustness benchmarks (JPEG Compression + Gaussian Blur). SSDC is a proxy metric for spatial organization and does not directly measure all aspects of representational geometry. Causal claims are made cautiously throughout: the experimental evidence strongly implicates reference frame stability as a driver of robustness, but the full mechanistic picture remains open. We discuss limitations and directions for future work in the paper.
 
 ---
 
