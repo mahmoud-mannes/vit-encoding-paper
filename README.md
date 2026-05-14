@@ -89,7 +89,7 @@ model.load_state_dict(checkpoint["model_state_dict"])
 
 ---
 
-## Reproducing the Analysis
+## Reproducing the Analysis (WORK IN PROGRESS)
 
 **Dependencies:**
 
@@ -99,9 +99,9 @@ pip install torch torchvision timm numpy matplotlib scipy
 
 Download the pretrained models from the link above and place them in the `models/` directory. Then open the notebooks in order:
 
-1. `interventions.ipynb` — applies RPI and RPT to each model, computes SSDC under intervention
-2. `ssdc_analysis.ipynb` — depth-wise SSDC plots across all PE variants, robustness correlation analysis
-3. `attention_maps.ipynb` — attention map extraction and spatial structure visualization
+1. `robustness_and_rpi.ipynb` — applies RPI to each model, computes SSDC under intervention, and evaluates robustness
+2. `ssdc_across_depth.ipynb` — depth-wise SSDC plots across all PE variants, with visualizations
+3. `magnitude_scaling.ipynb` — allows you to reproduce the magnitude scaling experiment
 
 Each notebook is self-contained with markdown explanation of the methodology at each step.
 
