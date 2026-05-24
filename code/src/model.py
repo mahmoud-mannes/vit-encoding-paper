@@ -1,10 +1,13 @@
 # Dependencies
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torchvision.transforms import V2 as T
 from torch.utils.data import Dataset,DataLoader
 from RoPE import apply_2d_rope
 from SPE import build_2d_sincos_pe
+from dataclasses import dataclass
+
 
 # ImagePatcher class, generates image patches from the original image
 
@@ -51,6 +54,7 @@ class MultiHeadedAttention(nn.Module):
         self.n_heads = n_heads
         self.d_head = d_key
         self.D = D
+        self.H, self.W = (int(num_patches ** 0.5),) * 2
         # Fused QKV projection
         self.qkv = nn.Linear(D, 3 * D)
         self.proj = nn.Linear(D, D)
@@ -153,6 +157,30 @@ class VisionTransformer(nn.Module):
         out = self.final_feed_forward(out[:, 0])
         return out
     
-    def predict(self, dataset, corruption_type=None):
-        pass
+    def predict(self, dataloader):
+        acc_list = []
+        for images,labels in dataloader:
+            self.eval()
+            with torch.inference_mode():
 
+                # Convert tensors to the GPU for faster training
+                images,labels = images.to(device), labels.to(device)
+
+                # Calculate outputs and loss
+                out = self(images)
+                dev_loss = F.cross_entropy(out,labels, label_smoothing = 0.1)
+
+                # Get the top predictions of the model.
+                probs = torch.softmax(out,dim = 1)
+                top_preds = probs.argmax(dim=1,keepdims=True).view(-1).to(device)
+
+                # Calculating the accuracy of the model on data it's never seen.
+                correct = (top_preds == labels).sum().item()
+                accuracy = correct / labels.shape[0]
+                acc_list.append(accuracy)
+
+                del images, labels, out, dev_loss
+                torch.cuda.empty_cache()
+
+        mean_acc = numpy.array(acc_list).mean().item()
+        return mean_acc
