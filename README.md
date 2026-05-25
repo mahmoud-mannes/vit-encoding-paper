@@ -48,9 +48,9 @@ vit-encoding-paper/
     
 ├── code/
 │   └── notebooks/
-│       ├── interventions.ipynb          # RPI and RPT intervention pipeline
-│       ├── ssdc_analysis.ipynb          # SSDC computation and depth-wise analysis
-│       └── attention_maps.ipynb         # Attention map extraction and visualization
+│       ├── robustness_and_rpi.ipynb          
+│       ├── ssdc_across_depth.ipynb          # SSDC computation and depth-wise analysis
+│       └── magnitude_scaling.ipynb         # Reproduce the PE scaling experiment
 ├── models/                              # See pretrained models below
 └── figures/                             # All figures as used in the paper
 ```
