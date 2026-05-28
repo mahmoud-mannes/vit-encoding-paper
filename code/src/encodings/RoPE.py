@@ -1,4 +1,4 @@
-# Setup RoPE
+import torch
 
 # split q,k into 4 chunks
 def rotate_half(a, b):
