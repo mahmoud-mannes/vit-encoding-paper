@@ -131,6 +131,8 @@ class VisionTransformer(nn.Module):
         super().__init__()
         if condition.upper() not in ["APE", "SPE", "RPT", "ABLATED", "ROPE"]:
             raise ValueError("condition must be in the provided list of valid conditions")
+
+        self.config = config
         self.condition = condition
         self.n_encoder_layers = config.n_encoder_layers
         self.device = config.device
@@ -197,7 +199,7 @@ class VisionTransformer(nn.Module):
         out = self.final_feed_forward(out[:, 0])
         return out
     
-    def predict(self, dataloader, magnitude = 1.0):
+    def predict(self, dataloader, RPI = False, magnitude = 1.0):
         acc_list = []
         for images,labels in dataloader:
             self.eval()
@@ -207,14 +209,14 @@ class VisionTransformer(nn.Module):
                 images,labels = images.to(self.device), labels.to(self.device)
 
                 # Calculate outputs and loss
-                out = self(images, magnitude)
+                out = self(images, RPI, magnitude)
                 dev_loss = F.cross_entropy(out,labels, label_smoothing = 0.1)
 
-                # Get the top predictions of the model.
+                # Get the top predictions of the model
                 probs = torch.softmax(out,dim = 1)
                 top_preds = probs.argmax(dim=1,keepdims=True).view(-1).to(self.device)
 
-                # Calculating the accuracy of the model on data it's never seen.
+                # Calculate the accuracy of the model on data it's never seen
                 correct = (top_preds == labels).sum().item()
                 accuracy = correct / labels.shape[0]
                 acc_list.append(accuracy)

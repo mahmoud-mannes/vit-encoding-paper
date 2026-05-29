@@ -1,6 +1,11 @@
 import numpy as np
 from scipy.stats import spearmanr
 from scipy.spatial.distance import cdist
+import sys
+import torch
+import os
+sys.path.append(os.path.abspath('..'))
+from main.prep_data import prep_data
 
 
 def spatial_similarity_distance_correlation(S,grid_size, metric):
@@ -35,3 +40,63 @@ def spatial_similarity_distance_correlation(S,grid_size, metric):
 
     corr, _ = spearmanr(-dist_vals, sim_vals)
     return corr
+
+def evaluate_ssdc(model, dataset, RPI = False, magnitude = 1.0):
+    dataloader = prep_data(dataset, model.config, None)  
+
+    token_inputs = {}
+
+    def token_hook(name):
+        def hook(module, inputs, output):
+            token_inputs[name] = inputs[0].detach().cpu()
+        return hook
+
+    handles = []
+
+    for name, module in model.named_modules():
+
+        if name.startswith("encoder_layers") and name.endswith(".1"): #encoder_layers.x.1 is the MultiHeadedAttention component of the encoder blocks
+            handles.append(
+                module.register_forward_hook(
+                    token_hook(name)
+                )
+            )
+
+    model.predict(dataloader, RPI, magnitude)
+
+    for handle in handles:
+        handle.remove()
+
+    layer_names = sorted(
+        token_inputs.keys(),
+        key=lambda x: int(x.split(".")[1])
+    )
+
+    ssdc_scores = []
+    cosine_maps = []
+
+    for layer_name in layer_names:
+
+        tok_inp = token_inputs[layer_name]
+
+        norm_tok = tok_inp / (
+            tok_inp.norm(dim=-1, keepdim=True) + 1e-8
+        )
+
+        cos_sim = (
+            norm_tok
+            @ norm_tok.transpose(-2, -1)
+        )
+
+        mean_cos = cos_sim.mean(0).numpy()
+
+        cosine_maps.append(mean_cos)
+
+        ssdc = spatial_similarity_distance_correlation(
+            mean_cos[1:, 1:], # Exclude cls token
+            metric="manhattan"
+        )
+
+        ssdc_scores.append(ssdc)
+
+    return ssdc_scores, cosine_maps
