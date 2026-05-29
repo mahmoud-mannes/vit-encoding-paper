@@ -82,7 +82,7 @@ initial_drop = 0.0
 prob_step_per_layer = 0.0 # No stochastic depth, but models were trained with them
 
 class MultiHeadedAttention(nn.Module):
-    def __init__(self, config, condition = "None"):
+    def __init__(self, config, condition):
         super().__init__()
         self.condition = condition
         self.n_heads = config.n_heads
@@ -180,10 +180,10 @@ class VisionTransformer(nn.Module):
         patches = self.patcher(x, RPI)
         cls_tokens = self.cls_token.expand(x.shape[0], -1, -1).to(self.device)
 
-        if self.condition == "SPE":
+        if self.condition.upper() == "SPE":
             patches = patches + (self.sincos_pe * magnitude)
             x = torch.cat((cls_tokens + (self.cls_pos * magnitude), patches), dim=1)
-        elif self.condition in ["APE", "RPT"]:
+        elif self.condition.upper() in ["APE", "RPT"]:
             x = torch.cat((cls_tokens, patches), dim=1) + (self.pos_embedding(self.pos_indices))
         else:
             x = torch.cat((cls_tokens, patches), dim=1)
