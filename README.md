@@ -43,14 +43,25 @@ vit-encoding-paper/
 │   ├── main.pdf                         # Main paper
 │   ├── main.tex                         # LaTeX source
 │   ├── checklist.tex                    # LaTeX source for checklist
-    ├── neurips_2026.sty                 # Style file
-    └── references.bib                   # Bibliography
-    
+|   ├── neurips_2026.sty                 # Style file
+|   └── references.bib                   # Bibliography
+|    
 ├── code/
-│   └── notebooks/
-│       ├── robustness_and_rpi.ipynb          
-│       ├── ssdc_across_depth.ipynb          # SSDC computation and depth-wise analysis
-│       └── magnitude_scaling.ipynb         # Reproduce the PE scaling experiment
+│   ├── notebooks/
+│   |    ├── rpi_ssdc_and_robustness.ipynb   # SSDC computation (under RPI and without), robustness evaluation.
+│   |    └── magnitude_scaling.ipynb         # Reproduce the PE scaling experiment
+|   |
+|   └── src/
+|       ├── encodings/
+|       |    ├── RoPE.py                  # Implementation of RoPE     
+|       |    └── SPE.py                   # Implementation of SPE
+|       ├── main/ 
+|       |    ├── model.py                  # Architecture and inference
+|       |    └── prep_data.py              # Prepare dataloader given downloaded dataset
+|       └── metrics/
+|            ├── robustness.py            # Evaluate fragility scores
+|            └── ssdc.py                  # Evaluate SSDC
+|
 ├── models/                              # See pretrained models below
 └── figures/                             # All figures as used in the paper
 ```
