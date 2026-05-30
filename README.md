@@ -76,15 +76,6 @@ Trained checkpoints for all five conditoins (APE, Sinusoidal PEs, RoPE, Ablated,
 
 All models are ViT-S scale (patch size 16) trained on ImageNet-100. For each model condition, there are 4 different models trained on different random seeds.
 
-To load a checkpoint:
-
-```python
-import torch
-
-checkpoint = torch.load("path/to/checkpoint.pth", map_location="cpu")
-model.load_state_dict(checkpoint["model_state_dict"])
-```
-
 ---
 
 ## Experimental Setup
@@ -100,7 +91,7 @@ model.load_state_dict(checkpoint["model_state_dict"])
 
 ---
 
-## Reproducing the Analysis (WORK IN PROGRESS)
+## Reproducing the Analysis
 
 **Dependencies:**
 
@@ -127,7 +118,7 @@ If you find this work useful, please cite:
 ```bibtex
 @article{mannes2025positional,
   title={Positional Encodings Anchor Spatial Structure in Vision Transformers: A Geometric Perspective on Robustness},
-  author={Mannes, Mahmoud},
+  author={Mannes Mahmoud},
   year={2025}
 }
 ```
