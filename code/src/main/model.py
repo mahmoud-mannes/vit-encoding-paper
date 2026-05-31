@@ -162,10 +162,11 @@ class VisionTransformer(nn.Module):
         
         
         self.pos_indices = torch.arange(config.num_patches + 1, device=config.device)
-        self.register_buffer(
-        "sincos_pe",
-        build_2d_sincos_pe(self.H, self.W, config.D, config.device)
-        )
+        if self.condition == "SPE":
+            self.register_buffer(
+            "sincos_pe",
+            build_2d_sincos_pe(self.config.H, self.config.W, config.D, config.device)
+            )
         
         def block_forward(self, out, i):
             LN1, MSA, DP_MSA = self.encoder_layers[i]

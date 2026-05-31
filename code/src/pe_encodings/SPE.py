@@ -1,3 +1,4 @@
+import torch
 def build_2d_sincos_pe(H, W, D, device):
     """
     Returns: [1, H*W, D]

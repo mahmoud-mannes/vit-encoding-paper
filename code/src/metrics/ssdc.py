@@ -92,11 +92,14 @@ def evaluate_ssdc(model, dataset, RPI = False, magnitude = 1.0):
 
         cosine_maps.append(mean_cos)
 
+        grid_size = (len(mean_cos) - 1) ** 0.5
+
         ssdc = spatial_similarity_distance_correlation(
-            mean_cos[1:, 1:], # Exclude cls token
+            mean_cos[1:, 1:], # Exclude cls token,
+            grid_size = grid_size,
             metric="manhattan"
         )
 
-        ssdc_scores.append(ssdc)
+        ssdc_scores.append(ssdc.item())
 
     return ssdc_scores, cosine_maps
