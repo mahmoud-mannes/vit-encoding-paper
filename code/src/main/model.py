@@ -2,14 +2,15 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/.."))
+print(os.path.abspath(os.path.dirname(__file__) + "/.."))
 import torch
 import numpy
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.transforms import v2 as T
 from torch.utils.data import Dataset,DataLoader
-from encodings.RoPE import apply_2d_rope
-from encodings.SPE import build_2d_sincos_pe
+from pe_encodings.RoPE import apply_2d_rope
+from pe_encodings.SPE import build_2d_sincos_pe
 from dataclasses import dataclass
 
 @dataclass

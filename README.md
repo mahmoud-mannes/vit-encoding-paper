@@ -52,7 +52,7 @@ vit-encoding-paper/
 │   |    └── magnitude_scaling.ipynb         # Reproduce the PE scaling experiment
 |   |
 |   └── src/
-|       ├── encodings/
+|       ├── pe_encodings/
 |       |    ├── RoPE.py                  # Implementation of RoPE     
 |       |    └── SPE.py                   # Implementation of SPE
 |       ├── main/ 
