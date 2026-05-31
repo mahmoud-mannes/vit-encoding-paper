@@ -4,7 +4,7 @@ from scipy.spatial.distance import cdist
 import sys
 import torch
 import os
-sys.path.append(os.path.abspath('..'))
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + ".."))
 from main.prep_data import prep_data
 
 

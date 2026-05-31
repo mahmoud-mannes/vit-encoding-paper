@@ -1,7 +1,7 @@
 # Dependencies
 import sys
 import os
-sys.path.append(os.path.abspath('..'))
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + ".."))
 import torch
 import numpy
 import torch.nn as nn
