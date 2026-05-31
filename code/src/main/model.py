@@ -186,7 +186,7 @@ class VisionTransformer(nn.Module):
             patches = patches + (self.sincos_pe * magnitude)
             x = torch.cat((cls_tokens + (self.cls_pos * magnitude), patches), dim=1)
         elif self.condition.upper() in ["APE", "RPT"]:
-            x = torch.cat((cls_tokens, patches), dim=1) + (self.pos_embedding(self.pos_indices))
+            x = torch.cat((cls_tokens, patches), dim=1) + (self.pos_embedding(self.pos_indices) * magnitude)
         else:
             x = torch.cat((cls_tokens, patches), dim=1)
 
