@@ -6,7 +6,7 @@ import torch
 import numpy
 import torch.nn as nn
 import torch.nn.functional as F
-from torchvision.transforms import V2 as T
+from torchvision.transforms import v2 as T
 from torch.utils.data import Dataset,DataLoader
 from encodings.RoPE import apply_2d_rope
 from encodings.SPE import build_2d_sincos_pe
